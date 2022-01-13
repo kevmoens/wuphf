@@ -1,12 +1,17 @@
 ﻿@inherits LayoutComponentBase
-
+@inject IJSRuntime jsrun
 <div class="page">
-    <div class="sidebar">
+    <nav class="sidebar @activeClass">
         <NavMenu />
-    </div>
+    </nav>
 
     <div class="main">
         <div class="top-row px-4">
+            <nav class="navbar navbar-dark">
+                <button class="navbar-toggler" @onclick="OnSidebarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </nav>
             <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
         </div>
 
@@ -15,3 +20,16 @@
         </div>
     </div>
 </div>
+@code {
+    string activeClass;
+    void OnSidebarCollapse()
+    {
+        if (string.IsNullOrEmpty(activeClass))
+        {
+            activeClass = "active";
+        } else
+        {
+            activeClass = "";
+        }
+    }
+} 
