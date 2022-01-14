@@ -10,7 +10,7 @@ Wuphf was designed to be a revolutionary communication tool.
     * fequency
   * missing task rules
 * notifications to multiple devices
-  * celphones
+  * cellphones
   * pc
   * mac
   * samsung tv
