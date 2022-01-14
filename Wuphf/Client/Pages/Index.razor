@@ -15,10 +15,13 @@
 
     .welcome {
         margin-top: 75px;
+        grid-column-start: 3;
     }
 
     .AccountContainer {
         display: grid;
+        grid-column-start: 3;
+        grid-row-start: 2;
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 1fr 1fr;
     }
@@ -26,9 +29,18 @@
     .container button {
         width: 100%;
     }
+    .laptopCell {
+        grid-column-start: 5;
+        grid-row-start: 2;
+    }
     .laptop {
+        margin-left: -50px;
         width: 240px;
         height: 240px;
+    }
+    .tabletCell {
+        grid-column-start: 1;
+        grid-row-start: 3;
     }
     .tablet {
         width: 240px;
@@ -40,19 +52,11 @@
     <div>
         <img class="phone" src="/images/phone.png" />
     </div>
-
-    <div></div>
+    
     <div class="welcome">
         <center><h1>Welcome to Wuphf!</h1></center>
     </div>
 
-    <div></div>
-
-    <div></div>
-
-    <div></div>
-
-    <div></div>
 
     <div class="AccountContainer">
         <div></div>
@@ -64,12 +68,10 @@
         </div>
     </div>
 
-    <div></div>
-    <div>
+    <div class="laptopCell">
         <img class="laptop" src="/images/laptop.png" />
     </div>
-    <div></div>
-    <div>
+    <div class="tabletCell">
         <img class="tablet" src="/images/tablet.jpg" />
     </div>
 </div>
