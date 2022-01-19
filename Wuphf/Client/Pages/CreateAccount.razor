@@ -1,0 +1,12 @@
+﻿@page "/createaccount"
+@inject NavigationManager navigationManager
+<input placeholder="user name" type="text">
+<input placeholder="password" type="password">
+<button> Create</button>
+<button @onclick="OnGoBack">Go back</button>
+@code {
+    public void OnGoBack()
+    {
+        navigationManager.NavigateTo("");
+    }
+}
