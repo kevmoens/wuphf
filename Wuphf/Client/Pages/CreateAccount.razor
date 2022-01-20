@@ -1,12 +1,74 @@
 ﻿@page "/createaccount"
 @inject NavigationManager navigationManager
-<input placeholder="user name" type="text">
-<input placeholder="password" type="password">
-<button> Create</button>
-<button @onclick="OnGoBack">Go back</button>
-@code {
-    public void OnGoBack()
-    {
-        navigationManager.NavigateTo("");
+
+<style>
+    .btn-border {
+        border: 1px solid;
     }
-}
+
+    .container {
+        display: grid;
+        grid-template-columns: 25% 50% 25%;
+        grid-template-rows: 16% 40px 40px 40px 40px 40px 40px;
+        height: 100%;
+    }
+
+    .centered {
+        grid-column-start: 2;
+    }
+
+    .centered-username {
+        grid-row-start: 2;
+        grid-column-start: 2;
+        width: 100%;
+    }
+
+    .centered-password {
+        grid-row-start: 3;
+        grid-column-start: 2;
+        width: 100%;
+    }
+
+    .centered-create {
+        grid-row-start: 4;
+        grid-column-start: 2;
+        width: 100%;
+    }
+
+    .centered-facebook {
+        grid-row-start: 6;
+        grid-column-start: 2;
+        width: 100%;
+    }
+
+    .centered-google {
+        grid-row-start: 7;
+        grid-column-start: 2;
+        width: 100%;
+    }
+
+    .container input {
+        width: 100%;
+    }
+</style>
+<div class="container">
+    <div class="centered-username">
+
+        <input placeholder="username" type="text">
+    </div>
+    <div class="centered-password">
+        <input placeholder="password" type="password">
+    </div>
+    <div class="centered-create">
+        <button type="button" class="btn btn-outline-primary btn-border centered-create"> Create</button>
+    </div>
+    <div>
+        <button type="button" class="btn btn-outline-danger btn-border" @onclick="OnGoBack">Go back</button>
+    </div>
+</div>
+    @code {
+        public void OnGoBack()
+        {
+            navigationManager.NavigateTo("");
+        }
+    }
