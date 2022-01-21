@@ -1,6 +1,7 @@
 ﻿@page "/createaccount"
+@using Wuphf.Shared
 @inject NavigationManager navigationManager
-
+@inject HttpClient Http
 <style>
     .btn-border {
         border: 1px solid;
@@ -60,15 +61,27 @@
         <input placeholder="password" type="password">
     </div>
     <div class="centered-create">
-        <button type="button" class="btn btn-outline-primary btn-border centered-create"> Create</button>
+        <button type="button" class="btn btn-outline-primary btn-border centered-create" @onclick="OnCreate"> Create</button>
     </div>
     <div>
         <button type="button" class="btn btn-outline-danger btn-border" @onclick="OnGoBack">Go back</button>
     </div>
 </div>
-    @code {
-        public void OnGoBack()
+@code {
+    public async Task OnCreate()
+    {
+        var accounts = await Http.GetFromJsonAsync<Account[]>("Account");
+        var result = await Http.PostAsJsonAsync<Account>("Account", new Account());
+        if (!result.IsSuccessStatusCode)
         {
-            navigationManager.NavigateTo("");
+            System.Diagnostics.Debug.Print(result.ReasonPhrase);
+            return;
         }
+
+        navigationManager.NavigateTo("Home");
     }
+    public void OnGoBack()
+    {
+        navigationManager.NavigateTo("");
+    }
+}
