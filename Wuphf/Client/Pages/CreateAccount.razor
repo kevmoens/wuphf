@@ -55,10 +55,10 @@
 <div class="container">
     <div class="centered-username">
 
-        <input placeholder="username" type="text">
+        <input placeholder="username" type="text" @bind-value="username">
     </div>
     <div class="centered-password">
-        <input placeholder="password" type="password">
+        <input placeholder="password" type="password" @bind-value="password">
     </div>
     <div class="centered-create">
         <button type="button" class="btn btn-outline-primary btn-border centered-create" @onclick="OnCreate"> Create</button>
@@ -68,10 +68,12 @@
     </div>
 </div>
 @code {
+    private string username;
+    private string password;
     public async Task OnCreate()
     {
-        var accounts = await Http.GetFromJsonAsync<Account[]>("Account");
-        var result = await Http.PostAsJsonAsync<Account>("Account", new Account());
+        var accounts = await Http.GetFromJsonAsync<Account[]>($"Account/{username}");
+        var result = await Http.PostAsJsonAsync<Account>("Account", accounts[0]);
         if (!result.IsSuccessStatusCode)
         {
             System.Diagnostics.Debug.Print(result.ReasonPhrase);
