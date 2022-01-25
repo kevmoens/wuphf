@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Wuphf.Server
 {
@@ -32,6 +33,7 @@ namespace Wuphf.Server
                                                  .AllowAnyMethod();
                                       });
             });
+            services.AddDbContext<Repository.WuphfRepository>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllersWithViews();
             services.AddRazorPages();
         }

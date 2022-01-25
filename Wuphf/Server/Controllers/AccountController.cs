@@ -14,28 +14,49 @@ namespace Wuphf.Server.Controllers
     [Route("[controller]")]
     public class AccountController : Controller
     {
-        WuphfRepository db = new WuphfRepository();
-        
+        WuphfRepository repository;
+        public AccountController(WuphfRepository repository)
+        {
+            this.repository = repository;
+        }
         // GET: values
         [HttpGet]
         public IEnumerable<Account> Get()
         {
-            return db.Accounts.ToList();
+            return repository.Accounts.ToList();
         }
 
         // GET values/5
         [HttpGet("{userName}")]
         public Account Get(string userName)
         {
-            return db.Accounts.FirstOrDefault((a) => a.UserName.ToUpperInvariant() == userName.ToUpperInvariant());
+            var result = repository.Accounts.AsEnumerable().First((a) => a.UserName.ToUpperInvariant() == userName.ToUpperInvariant());
+            return result;
         }
 
-        // POST values
+        // POST values (Add)
         [HttpPost]
         public bool Post(Account value)
         {
-            db.Accounts.Add(value);
+            repository.Accounts.Add(value);
             return true;
+        }
+
+        // POST values
+        [HttpPost("{username}")]
+        public string Post(string username, string password)
+        {
+            var account = repository.Accounts.FirstOrDefault((a) => a.UserName.ToUpperInvariant() == username.ToUpperInvariant());
+            if (account == null)
+            {
+                return "InvalidAccount";
+            }
+            if (account.Password != password)
+            {
+                return "InvalidPassword";
+            }
+
+            return "";
         }
 
         // PUT values/5
@@ -48,10 +69,10 @@ namespace Wuphf.Server.Controllers
         [HttpDelete("{userName}")]
         public void Delete(string userName)
         {
-            var remAccts = db.Accounts.Where((a) => a.UserName.ToUpperInvariant() == userName.ToUpperInvariant());
+            var remAccts = repository.Accounts.Where((a) => a.UserName.ToUpperInvariant() == userName.ToUpperInvariant());
             foreach (var acct in remAccts)
             {
-                db.Accounts.Remove(acct);
+                repository.Accounts.Remove(acct);
             }
         }
     }

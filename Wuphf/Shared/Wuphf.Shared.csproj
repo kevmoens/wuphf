@@ -7,4 +7,10 @@
   <ItemGroup>
     <SupportedPlatform Include="browser" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.13" />
+  </ItemGroup>
 </Project>

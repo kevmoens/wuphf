@@ -79,6 +79,7 @@
             System.Diagnostics.Debug.Print(result.ReasonPhrase);
             return;
         }
+        var content = await result.Content.ReadAsStringAsync();
 
         navigationManager.NavigateTo("Home");
     }

@@ -10,6 +10,10 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="5.0.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.13">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -21,8 +25,11 @@
   <ItemGroup>
     <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
     <None Remove="Repository\" />
+    <None Remove="Data\" />
+    <None Remove="Microsoft.EntityFrameworkCore.Design" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repository\" />
+    <Folder Include="Data\" />
   </ItemGroup>
 </Project>
