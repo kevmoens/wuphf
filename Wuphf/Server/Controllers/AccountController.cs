@@ -18,6 +18,8 @@ namespace Wuphf.Server.Controllers
         public AccountController(WuphfRepository repository)
         {
             this.repository = repository;
+
+            repository.Database.EnsureCreated();
         }
         // GET: values
         [HttpGet]
@@ -30,7 +32,11 @@ namespace Wuphf.Server.Controllers
         [HttpGet("{userName}")]
         public Account Get(string userName)
         {
-            var result = repository.Accounts.AsEnumerable().First((a) => a.UserName.ToUpperInvariant() == userName.ToUpperInvariant());
+            var result = repository.Accounts.AsEnumerable().FirstOrDefault((a) => a.UserName.ToUpperInvariant() == userName.ToUpperInvariant());
+            if (result == null)
+            {
+                return new Account();
+            }
             return result;
         }
 
@@ -39,6 +45,7 @@ namespace Wuphf.Server.Controllers
         public bool Post(Account value)
         {
             repository.Accounts.Add(value);
+            repository.SaveChanges();
             return true;
         }
 
