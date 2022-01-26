@@ -52,6 +52,7 @@
         width: 100%;
     }
 </style>
+
 <div class="container">
     <div class="centered-username">
 
@@ -67,7 +68,25 @@
         <button type="button" class="btn btn-outline-danger btn-border" @onclick="OnGoBack">Go back</button>
     </div>
 </div>
+
+
+
+
+<Modal @ref="modal">
+    <Title>Error</Title>
+    <Body>
+        <p>
+            Account already exists!
+        </p>
+    </Body>
+    <Footer>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" @onclick="() => modal.Close()">Close</button>
+    </Footer>
+</Modal>
+
 @code {
+    private Modal modal { get; set; }
+
     private string username;
     private string password;
     public async Task OnCreate()
@@ -75,7 +94,8 @@
         var account = await Http.GetFromJsonAsync<Account>($"Account/{username}");
         if (account != null && !string.IsNullOrEmpty(account.UserName))
         {
-            System.Diagnostics.Debug.Print("HERE");
+            modal.Open();
+            StateHasChanged();
             return;
         }
         var newAccount = new Account() { UserName = username, Password = password };
@@ -90,6 +110,7 @@
 
         navigationManager.NavigateTo("Home");
     }
+
     public void OnGoBack()
     {
         navigationManager.NavigateTo("");
