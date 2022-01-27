@@ -51,16 +51,16 @@ namespace Wuphf.Server.Controllers
 
         // POST values
         [HttpPost("{username}")]
-        public string Post(string username, string password)
+        public string Post(LoginRequest login)
         {
-            var account = repository.Accounts.FirstOrDefault((a) => a.UserName.ToUpperInvariant() == username.ToUpperInvariant());
+            var account = repository.Accounts.AsEnumerable().FirstOrDefault((a) => a.UserName.ToUpperInvariant() == login.UserName.ToUpperInvariant());
             if (account == null)
             {
-                return "InvalidAccount";
+                return "Invalid Account";
             }
-            if (account.Password != password)
+            if (account.Password != login.Password)
             {
-                return "InvalidPassword";
+                return "Invalid Password";
             }
 
             return "";

@@ -1,0 +1,122 @@
+﻿@page "/login"
+@using Wuphf.Shared
+@inject NavigationManager navigationManager
+@inject HttpClient Http
+<style>
+    .btn-border {
+        border: 1px solid;
+    }
+
+    .container {
+        display: grid;
+        grid-template-columns: 25% 50% 25%;
+        grid-template-rows: 16% 40px 40px 40px 40px 40px 40px;
+        height: 100%;
+    }
+
+    .centered {
+        grid-column-start: 2;
+    }
+
+    .centered-username {
+        grid-row-start: 2;
+        grid-column-start: 2;
+        width: 100%;
+    }
+
+    .centered-password {
+        grid-row-start: 3;
+        grid-column-start: 2;
+        width: 100%;
+    }
+
+    .centered-create {
+        grid-row-start: 4;
+        grid-column-start: 2;
+        width: 100%;
+    }
+
+    .centered-facebook {
+        grid-row-start: 6;
+        grid-column-start: 2;
+        width: 100%;
+    }
+
+    .centered-google {
+        grid-row-start: 7;
+        grid-column-start: 2;
+        width: 100%;
+    }
+
+    .container input {
+        width: 100%;
+    }
+</style>
+
+<div class="container">
+    <div class="centered-username">
+
+        <input placeholder="username" type="text" @bind-value="username">
+    </div>
+    <div class="centered-password">
+        <input placeholder="password" type="password" @bind-value="password">
+    </div>
+    <div class="centered-create">
+        <button type="button" class="btn btn-outline-primary btn-border centered-create" @onclick="OnLogin">Login</button>
+    </div>
+    <div>
+        <button type="button" class="btn btn-outline-danger btn-border" @onclick="OnGoBack">Go back</button>
+    </div>
+</div>
+
+
+
+
+<Modal @ref="modal">
+    <Title>Error</Title>
+    <Body>
+        <p>
+            @ErrorMessage
+        </p>
+    </Body>
+    <Footer>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" @onclick="() => modal.Close()">Close</button>
+    </Footer>
+</Modal>
+
+@code {
+    private Modal modal { get; set; }
+    private string ErrorMessage;
+    private string username;
+    private string password;
+    public async Task OnLogin()
+    {
+        if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+        {
+            ErrorMessage = "Username and Password are required.";
+            modal.Open();
+            return;
+        }
+
+        var login = new LoginRequest() { UserName = username, Password = password };
+        var result = await Http.PostAsJsonAsync<LoginRequest>($"Account/{username}", login);
+        if (!result.IsSuccessStatusCode)
+        {
+            System.Diagnostics.Debug.Print(result.ReasonPhrase);
+            return;
+        }
+        var content = await result.Content.ReadAsStringAsync();
+        if (!string.IsNullOrEmpty(content))
+        {
+            ErrorMessage = content;
+            modal.Open();
+            return;
+        }
+        navigationManager.NavigateTo("Home");
+    }
+
+    public void OnGoBack()
+    {
+        navigationManager.NavigateTo("");
+    }
+}
