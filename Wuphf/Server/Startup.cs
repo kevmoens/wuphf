@@ -66,6 +66,7 @@ namespace Wuphf.Server
                 endpoints.MapControllers();
                 endpoints.MapFallbackToFile("index.html");
             });
+            
         }
     }
 }

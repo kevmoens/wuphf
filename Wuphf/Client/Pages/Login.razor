@@ -1,7 +1,10 @@
 ﻿@page "/login"
 @using Wuphf.Shared
+@using Wuphf.Shared.Session
+@using Wuphf.Client.Models.Session
 @inject NavigationManager navigationManager
 @inject HttpClient Http
+@inject Session session 
 <style>
     .btn-border {
         border: 1px solid;
@@ -106,12 +109,16 @@
             return;
         }
         var content = await result.Content.ReadAsStringAsync();
-        if (!string.IsNullOrEmpty(content))
+        Guid token = Guid.Empty;
+        if (!string.IsNullOrEmpty(content) && !Guid.TryParse(content,out token))
         {
             ErrorMessage = content;
             modal.Open();
             return;
         }
+        session.UserName = username;
+        session.Token = content;
+        PubSub.Hub.Default.Publish<SessionStatusChangedEvent>(new SessionStatusChangedEvent() { Token = content });
         navigationManager.NavigateTo("Home");
     }
 

@@ -1,5 +1,8 @@
 ﻿@page "/"
-@inject NavigationManager navigationManager 
+@using Wuphf.Client.Models.Session
+@using Wuphf.Shared.Session
+@inject NavigationManager navigationManager
+@inject Session session 
 <style>
     .container {
         display: grid;
@@ -30,23 +33,28 @@
     .container button {
         width: 100%;
     }
+
     .laptopCell {
         grid-column-start: 5;
         grid-row-start: 2;
     }
+
     .laptop {
         margin-left: -50px;
         width: 240px;
         height: 240px;
     }
+
     .tabletCell {
         grid-column-start: 1;
         grid-row-start: 3;
     }
+
     .tablet {
         width: 240px;
         height: 240px;
     }
+
     .btn-login {
         width: auto;
     }
@@ -56,7 +64,7 @@
     <div>
         <img class="phone" src="/images/phone.png" />
     </div>
-    
+
     <div class="welcome">
         <center><h1>Welcome to Wuphf!</h1></center>
     </div>
@@ -80,6 +88,16 @@
     </div>
 </div>
 @code{
+    private bool IsLoggedIn;
+    protected override void OnInitialized()
+    {
+        PubSub.Hub.Default.Subscribe<SessionStatusChangedEvent>(OnSessionStatusChanged);
+        base.OnInitialized();
+        if (!string.IsNullOrEmpty(session?.Token))
+        {
+            navigationManager.NavigateTo("home");
+        }
+    }
     public void OnCreateAccount()
     {
         navigationManager.NavigateTo("createaccount");
@@ -87,5 +105,13 @@
     public void OnLogin()
     {
         navigationManager.NavigateTo("login");
+    }
+    public void OnSessionStatusChanged(SessionStatusChangedEvent sessionStatus)
+    {
+        IsLoggedIn = !string.IsNullOrEmpty(sessionStatus.Token);
+        if (IsLoggedIn)
+        {
+            navigationManager.NavigateTo("home");
+        }
     }
 }

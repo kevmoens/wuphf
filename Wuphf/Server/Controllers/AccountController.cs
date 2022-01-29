@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Wuphf.Server.Repository;
 using Wuphf.Shared;
 
@@ -19,7 +20,8 @@ namespace Wuphf.Server.Controllers
         {
             this.repository = repository;
 
-            repository.Database.EnsureCreated();
+            //repository.Database.EnsureCreated();
+            repository.Database.Migrate();
         }
         // GET: values
         [HttpGet]
@@ -42,11 +44,13 @@ namespace Wuphf.Server.Controllers
 
         // POST values (Add)
         [HttpPost]
-        public bool Post(Account value)
+        public string Post(Account value)
         {
             repository.Accounts.Add(value);
+            var sess = new Shared.Session.Session() { Token = Guid.NewGuid().ToString(), UserName = value.UserName };
+            repository.Sessions.Add(sess);
             repository.SaveChanges();
-            return true;
+            return sess.Token;
         }
 
         // POST values
@@ -62,8 +66,10 @@ namespace Wuphf.Server.Controllers
             {
                 return "Invalid Password";
             }
-
-            return "";
+            var sess = new Shared.Session.Session() { Token = Guid.NewGuid().ToString(), UserName = login.UserName };
+            repository.Sessions.Add(sess);
+            repository.SaveChanges();
+            return sess.Token;
         }
 
         // PUT values/5
@@ -81,6 +87,7 @@ namespace Wuphf.Server.Controllers
             {
                 repository.Accounts.Remove(acct);
             }
+            repository.SaveChanges();
         }
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Wuphf.Shared.Session;
 
 namespace Wuphf.Client
 {
@@ -18,7 +19,7 @@ namespace Wuphf.Client
             builder.RootComponents.Add<App>("#app");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.Configuration["serverUrl"]) });
-
+            builder.Services.AddSingleton<Session>();
             await builder.Build().RunAsync();
         }
     }
