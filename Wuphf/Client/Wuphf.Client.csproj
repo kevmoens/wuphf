@@ -27,9 +27,11 @@
     <None Remove="Models\" />
     <None Remove="PubSub" />
     <None Remove="Models\Session\" />
+    <None Remove="Models\Dialog\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Models\Session\" />
+    <Folder Include="Models\Dialog\" />
   </ItemGroup>
 </Project>

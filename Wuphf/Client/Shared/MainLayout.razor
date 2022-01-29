@@ -1,4 +1,8 @@
 ﻿@inherits LayoutComponentBase
+@using Wuphf.Client.Pages
+@using Wuphf.Client.Models.Dialog
+@using System.Threading
+@using System.Threading.Tasks
 @inject IJSRuntime jsrun
 <div class="page">
     <nav class="sidebar @activeClass">
@@ -17,19 +21,59 @@
 
         <div class="content">
             @Body
+            <Modal @ref="modal">
+                <Title>@Title</Title>
+                <Body>
+                    <p>
+                        @ErrorMessage
+                    </p>
+                </Body>
+                <Footer>
+                    @if (Buttons == DialogButtons.OK)
+                    {
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" @onclick="OnOK">OK</button>
+                    }
+                </Footer>
+            </Modal>
         </div>
     </div>
 </div>
+
 @code {
+
+    private Modal modal { get; set; }
+    private string ErrorMessage;
+    private string Title;
+    private DialogButtons Buttons;
+    private TaskCompletionSource<string> CompletionSource;
     string activeClass;
     void OnSidebarCollapse()
     {
         if (string.IsNullOrEmpty(activeClass))
         {
             activeClass = "active";
-        } else
+        }
+        else
         {
             activeClass = "";
         }
+    }
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        PubSub.Hub.Default.Subscribe<MsgBoxShowEvent>((MsgBoxShowEvent msg) =>
+        {
+            ErrorMessage = msg.Message;
+            Title = msg.Title;
+            CompletionSource = msg.CompletionSource;
+            Buttons = msg.Buttons;
+            modal.Open();
+            StateHasChanged();
+        });
+    }
+    public void OnOK()
+    {
+        modal.Close();
+        CompletionSource.TrySetResult("OK");
     }
 } 

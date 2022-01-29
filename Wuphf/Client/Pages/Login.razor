@@ -2,6 +2,7 @@
 @using Wuphf.Shared
 @using Wuphf.Shared.Session
 @using Wuphf.Client.Models.Session
+@using Wuphf.Client.Models.Dialog
 @inject NavigationManager navigationManager
 @inject HttpClient Http
 @inject Session session 
@@ -75,29 +76,15 @@
 
 
 
-<Modal @ref="modal">
-    <Title>Error</Title>
-    <Body>
-        <p>
-            @ErrorMessage
-        </p>
-    </Body>
-    <Footer>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" @onclick="() => modal.Close()">Close</button>
-    </Footer>
-</Modal>
 
 @code {
-    private Modal modal { get; set; }
-    private string ErrorMessage;
     private string username;
     private string password;
     public async Task OnLogin()
     {
         if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
         {
-            ErrorMessage = "Username and Password are required.";
-            modal.Open();
+            await MsgBox.Show("Username and Password are required.", "Wuphf Error", DialogButtons.OK);
             return;
         }
 
@@ -112,8 +99,7 @@
         Guid token = Guid.Empty;
         if (!string.IsNullOrEmpty(content) && !Guid.TryParse(content,out token))
         {
-            ErrorMessage = content;
-            modal.Open();
+            await MsgBox.Show(content, "Wuphf Error", DialogButtons.OK);
             return;
         }
         session.UserName = username;
