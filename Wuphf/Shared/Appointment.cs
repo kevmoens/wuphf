@@ -21,11 +21,5 @@ namespace Wuphf.Shared
         public bool? SkipWeekend { get; set; }
 
     }
-    public enum ReoccuranceTypes
-    {
-        None
-        ,Daily
-        ,Weekly
-    }
 }
 
