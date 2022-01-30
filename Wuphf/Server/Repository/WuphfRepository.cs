@@ -12,6 +12,7 @@ namespace Wuphf.Server.Repository
     {
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Session> Sessions { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
 
         public WuphfRepository(DbContextOptions<WuphfRepository> options) : base(options)
         {
@@ -26,6 +27,10 @@ namespace Wuphf.Server.Repository
             modelBuilder.Entity<Session>(entity =>
             {
                 entity.HasKey(e => e.Token);
+            });
+            modelBuilder.Entity<Appointment>(entity =>
+            {
+                entity.HasKey(e => e.AppointmentID);
             });
         }
     }
