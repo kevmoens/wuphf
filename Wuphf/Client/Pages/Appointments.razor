@@ -1,6 +1,103 @@
 ﻿@page "/appointments"
-<h3>Appointments</h3>
+@inject HttpClient Http
+@using Wuphf.Shared
+<style>
+    .container {
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+    .listContainer {
+        display: grid;
+        grid-template-rows: 30px 100%;
+    }
+    .listTable {
+        grid-row-start: 2;
+    }
+    .detailContianer {
+        display: grid;
+        grid-template-rows: 50px 100px 50px 35px;
+    }
+    button {
+        width: 100%;
+        margin: 2px;
+    }
+</style>
+<div class="container">
+    <div class="listContainer">
+        <div><button class="btn btn-primary" @onclick="OnAdd">Add</button></div>
+        <div class="listTable">
+            <table class="table">
+                <thead>
+                    <td>Appointment</td>
+                    <td></td>
+                    <td></td>
+                </thead>
+                <tbody>
+                @foreach (var appt in appointments)
+                {
+                    <tr>
+                        <td>@appt.Description</td>
+                        <td><button @onclick="() => OnEdit(appt)">
+                                <span class="oi oi-pencil"></span>
+                            </button></td>
+                        <td><button @onclick="() => OnRemove(appt)">
+                            <span class="oi oi-x"></span>
+                        </button></td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="detailContainer">
+        @if (hasSelectedAppointment)
+        {
+            <div>
+                <input type="text" @bind-value="selectedAppointment.Description" />
+                Time:
+            </div>
+            <div>
+                Reoccurance:
+            </div>
+            <div>
+                End Date:
+            </div>
+            <div>
+                <button>OK</button>
+            </div>
+        }
+    </div>
+</div>
+    @code {
+        private bool hasSelectedAppointment;
+        private Appointment selectedAppointment;
+        private List<Appointment> appointments = new List<Appointment>();
+        protected override async Task OnInitializedAsync()
+        {
+            var result = await Http.GetFromJsonAsync<Appointment[]>("Appointment");
+            appointments = result?.ToList();
+        }
+        public void OnAdd()
+        {
+            if (appointments == null)
+            {
+                appointments = new List<Appointment>();
+            }
+            selectedAppointment = new Appointment();
+            hasSelectedAppointment = true;
+            appointments.Add(selectedAppointment);
+            StateHasChanged();
+        }
+        public void OnEdit(Appointment appt)
+        {
+            selectedAppointment = appt;
+            hasSelectedAppointment = true;
+            StateHasChanged();
+        }
+        public void OnRemove(Appointment appt)
+        {
+            appointments.Remove(appt);
+            StateHasChanged();
+        }
 
-@code {
-
-}
+    }
