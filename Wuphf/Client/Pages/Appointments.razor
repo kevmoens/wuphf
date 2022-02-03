@@ -18,6 +18,10 @@
         display: grid;
         grid-template-rows: 50px 100px 50px 35px;
     }
+    .reoccuranceContainer {
+        display: grid;
+        grid-template-columns: 140px 80%;
+    }
     button {
         width: 100%;
         margin: 2px;
@@ -68,19 +72,30 @@
                     <input type="text" @bind-value="selectedAppointment.Description" />
                     Time: <input type="time" @bind-value="selectedAppointment.ScheduleTime" />
                 </div>
-                <div>
-                    Reoccurance:
-                    <InputRadioGroup Name="reoccurance" @bind-Value="selectedAppointment.Reoccurance">
-                        <InputRadio Name="reoccurance" Value="ReoccuranceTypes.None" />
-                        None<br><br>
-                        <InputRadio Name="reoccurance" Value="ReoccuranceTypes.Daily" />
-                        Daily<br><br>
-                        <InputRadio Name="reoccurance" Value="ReoccuranceTypes.Weekly" />
-                        Weekly
-                    </InputRadioGroup>
+                <div class="reoccuranceContainer">
+                    <div>
+                        Reoccurance:<br />
+                        <InputRadioGroup Name="reoccurance" @bind-Value="selectedAppointment.Reoccurance">
+                            <InputRadio Name="reoccurance" Value="ReoccuranceTypes.None" />
+                            None<br>
+                            <InputRadio Name="reoccurance" Value="ReoccuranceTypes.Daily" />
+                            Daily<br>
+                            <InputRadio Name="reoccurance" Value="ReoccuranceTypes.Weekly" />
+                            Weekly
+                        </InputRadioGroup>
+                    </div>
+                    <div>
+                        <input type="checkbox" /> Sunday
+                        <input type="checkbox" /> Monday
+                        <input type="checkbox" /> Tuesday
+                        <input type="checkbox" /> Wednesday
+                        <input type="checkbox" /> Thursday
+                        <input type="checkbox" /> Friday
+                        <input type="checkbox" /> Saturday
+                    </div>
                 </div>
                 <div>
-                    End Date:
+                    End Date: <input type="date" @bind-value="selectedAppointment.EndDate" />
                 </div>
                 <div>
                     <button class="btn btn-primary" type="submit">OK</button>
