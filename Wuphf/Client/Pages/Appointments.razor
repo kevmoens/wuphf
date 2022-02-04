@@ -4,11 +4,11 @@
 <style>
     .container {
         display: grid;
-        grid-template-columns: 50% 50%;
+        grid-template-columns: 1fr 1fr;
     }
     .listContainer {
         display: grid;
-        grid-template-rows: 50px 100%;
+        grid-template-rows: 50px 1fr;
         margin: 10px;
     }
     .listTable {
@@ -20,7 +20,7 @@
     }
     .reoccuranceContainer {
         display: grid;
-        grid-template-columns: 140px 80%;
+        grid-template-columns: 140px 1fr;
     }
     button {
         width: 100%;
@@ -85,13 +85,27 @@
                         </InputRadioGroup>
                     </div>
                     <div>
-                        <input type="checkbox" /> Sunday
-                        <input type="checkbox" /> Monday
-                        <input type="checkbox" /> Tuesday
-                        <input type="checkbox" /> Wednesday
-                        <input type="checkbox" /> Thursday
-                        <input type="checkbox" /> Friday
-                        <input type="checkbox" /> Saturday
+                        <div>
+                            <input type="checkbox" /> Sunday
+                        </div>
+                        <div>
+                            <input type="checkbox" /> Monday
+                        </div>
+                        <div>
+                            <input type="checkbox" /> Tuesday
+                        </div>
+                        <div>
+                            <input type="checkbox" /> Wednesday
+                        </div>
+                        <div>
+                            <input type="checkbox" /> Thursday
+                        </div>
+                        <div>
+                            <input type="checkbox" /> Friday
+                        </div>
+                        <div>
+                            <input type="checkbox" /> Saturday
+                        </div>
                     </div>
                 </div>
                 <div>
