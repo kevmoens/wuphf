@@ -33,12 +33,18 @@ namespace Wuphf.Client.Models
         }
         private void UpdateBitwise()
         {
-            DayOfWeekBitwise days = DayOfWeekBitwise.None;
-            if (appointment.WeekDays == null)
+            if (appointment?.WeekDays == null)
             {
+                sunday = false;
+                monday = false;
+                tuesday = false;
+                wednesday = false;
+                thursday = false;
+                friday = false;
+                saturday = false;
                 return;
             }
-            days = (DayOfWeekBitwise)appointment.WeekDays;
+            DayOfWeekBitwise days = (DayOfWeekBitwise)appointment.WeekDays;
             sunday = days.HasFlag(DayOfWeekBitwise.Sunday);
             monday = days.HasFlag(DayOfWeekBitwise.Monday);
             tuesday = days.HasFlag(DayOfWeekBitwise.Tuesday);
