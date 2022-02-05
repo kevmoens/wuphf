@@ -1,6 +1,7 @@
 ﻿@page "/appointments"
 @inject HttpClient Http
 @using Wuphf.Shared
+@using Wuphf.Client.Models
 <style>
     .container {
         display: grid;
@@ -86,25 +87,25 @@
                     </div>
                     <div>
                         <div>
-                            <input type="checkbox" /> Sunday
+                            <input type="checkbox" @bind-value="dayOfWeekAppointment.Sunday"/> Sunday
                         </div>
                         <div>
-                            <input type="checkbox" /> Monday
+                            <input type="checkbox" @bind-value="dayOfWeekAppointment.Monday" /> Monday
                         </div>
                         <div>
-                            <input type="checkbox" /> Tuesday
+                            <input type="checkbox" @bind-value="dayOfWeekAppointment.Tuesday" /> Tuesday
                         </div>
                         <div>
-                            <input type="checkbox" /> Wednesday
+                            <input type="checkbox" @bind-value="dayOfWeekAppointment.Wednesday" /> Wednesday
                         </div>
                         <div>
-                            <input type="checkbox" /> Thursday
+                            <input type="checkbox" @bind-value="dayOfWeekAppointment.Thursday" /> Thursday
                         </div>
                         <div>
-                            <input type="checkbox" /> Friday
+                            <input type="checkbox" @bind-value="dayOfWeekAppointment.Friday" /> Friday
                         </div>
                         <div>
-                            <input type="checkbox" /> Saturday
+                            <input type="checkbox" @bind-value="dayOfWeekAppointment.Saturday" /> Saturday
                         </div>
                     </div>
                 </div>
@@ -121,6 +122,8 @@
     @code {
         private bool hasSelectedAppointment;
         private Appointment selectedAppointment;
+        public Appointment SelectedAppointment { get { return selectedAppointment; } set { selectedAppointment = value; dayOfWeekAppointment.Appointment = value; } }
+        private DayOfWeekAppointment dayOfWeekAppointment = new DayOfWeekAppointment();
         private List<Appointment> appointments = new List<Appointment>();
         protected override async Task OnInitializedAsync()
         {
@@ -133,14 +136,14 @@
             {
                 appointments = new List<Appointment>();
             }
-            selectedAppointment = new Appointment();
+            SelectedAppointment = new Appointment();
             hasSelectedAppointment = true;
-            appointments.Add(selectedAppointment);
+            appointments.Add(SelectedAppointment);
             StateHasChanged();
         }
         public void OnEdit(Appointment appt)
         {
-            selectedAppointment = appt;
+            SelectedAppointment = appt;
             hasSelectedAppointment = true;
             StateHasChanged();
         }
