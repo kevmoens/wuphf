@@ -7,6 +7,7 @@ namespace Wuphf.Shared
     {
         public Appointment()
         {
+            AppointmentID = Guid.NewGuid();
         }
         [Key]
         public Guid AppointmentID { get; set; }

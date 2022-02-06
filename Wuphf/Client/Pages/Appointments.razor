@@ -23,7 +23,7 @@
         display: grid;
         grid-template-columns: 140px 1fr;
     }
-    button {
+    .container button {
         width: 100%;
         margin: 2px;
     }
@@ -34,7 +34,7 @@
         <div class="listTable">
             <table class="table">
                 <thead>
-                <td>Appointment</td>
+                <td>Appointments</td>
                 <td></td>
                 <td></td>
                 </thead>
@@ -147,15 +147,22 @@
             hasSelectedAppointment = true;
             StateHasChanged();
         }
-        public void OnRemove(Appointment appt)
+        public async void OnRemove(Appointment appt)
         {
+            await Http.DeleteAsync($"Appointment/{appt.AppointmentID}");
             appointments.Remove(appt);
+            if (appt == selectedAppointment)
+            {
+                selectedAppointment = null;
+                hasSelectedAppointment = false;
+            }
             StateHasChanged();
         }
 
-        private void HandleValidSubmit()
+        private async void HandleValidSubmit()
         {
-
+            //Add or Update
+            await Http.PostAsJsonAsync<Appointment>("Appointment", selectedAppointment);
         }
 
 
