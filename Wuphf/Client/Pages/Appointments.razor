@@ -2,32 +2,7 @@
 @inject HttpClient Http
 @using Wuphf.Shared
 @using Wuphf.Client.Models
-<style>
-    .container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-    }
-    .listContainer {
-        display: grid;
-        grid-template-rows: 50px 1fr;
-        margin: 10px;
-    }
-    .listTable {
-        grid-row-start: 2;
-    }
-    .detailContianer {
-        display: grid;
-        grid-template-rows: 50px 100px 50px 35px;
-    }
-    .reoccuranceContainer {
-        display: grid;
-        grid-template-columns: 140px 1fr;
-    }
-    .container button {
-        width: 100%;
-        margin: 2px;
-    }
-</style>
+
 <div class="container">
     <div class="listContainer">
         <div><button class="btn btn-primary" @onclick="OnAdd">Add</button></div>
