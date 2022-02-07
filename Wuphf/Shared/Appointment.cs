@@ -14,6 +14,7 @@ namespace Wuphf.Shared
         [Required]
         public string Description { get; set; }
         public DateTime? ScheduleTime { get; set; }
+        public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         private ReoccuranceTypes? reoccuranceTypes = ReoccuranceTypes.None;
         [EnumDataType(typeof(ReoccuranceTypes))]
