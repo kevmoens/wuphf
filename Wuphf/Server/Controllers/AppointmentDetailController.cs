@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Wuphf.Server.Repository;
-using Wuphf.Shared;
+using Wuphf.Shared.Appointments;
 
 namespace Wuphf.Server.Controllers
 {

@@ -1,6 +1,7 @@
 ﻿@page "/appointments"
 @inject HttpClient Http
 @using Wuphf.Shared
+@using Wuphf.Shared.Appointments
 @using Wuphf.Client.Models
 
 <div class="container">
@@ -88,7 +89,7 @@
                     End Date: <input type="date" @bind-value="selectedAppointment.EndDate" />
                 </div>
                 <div>
-                    <button class="btn btn-primary" type="submit">OK</button>
+                    <button class="btn btn-primary" type="submit">Save</button>
                 </div>
             </EditForm>
         }

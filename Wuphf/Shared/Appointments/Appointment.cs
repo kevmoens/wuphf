@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Wuphf.Shared
+namespace Wuphf.Shared.Appointments
 {
     public class Appointment
     {
@@ -20,7 +20,7 @@ namespace Wuphf.Shared
         [EnumDataType(typeof(ReoccuranceTypes))]
         public ReoccuranceTypes? Reoccurance { get => reoccuranceTypes; set { reoccuranceTypes = value; } }
         public int? NumDaysBetween { get; set; }
-        public int? WeekDays { get; set; }
+        public int? WeekDays { get; set; } //Su, Mo, Tu, We, Th, Fr, Sa (Bitwise)
         public bool? SkipWeekend { get; set; }
 
     }

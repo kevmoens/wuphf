@@ -1,5 +1,6 @@
 ﻿using System;
 using Wuphf.Shared;
+using Wuphf.Shared.Appointments;
 
 namespace Wuphf.Client.Models
 {

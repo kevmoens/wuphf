@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Wuphf.Shared
+namespace Wuphf.Shared.Appointments
 {
     public class AppointmentDetail
     {

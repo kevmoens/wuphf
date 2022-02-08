@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Wuphf.Server.Repository;
-using Wuphf.Shared;
+using Wuphf.Shared.Appointments;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -39,6 +39,7 @@ namespace Wuphf.Server.Controllers
             {
                 //Add
                 repository.Appointments.Add(value);
+                
                 repository.SaveChanges();
                 return;
             }
