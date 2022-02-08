@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wuphf.Client", "Wuphf\Clien
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wuphf.Shared", "Wuphf\Shared\Wuphf.Shared.csproj", "{30F04827-D79C-4D93-A86B-9A0C67CB52C3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wuphf.Console", "Wuphf.Console\Wuphf.Console.csproj", "{BF5E4CFB-2F40-4B58-9128-CCAB42EDC85D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{30F04827-D79C-4D93-A86B-9A0C67CB52C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30F04827-D79C-4D93-A86B-9A0C67CB52C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30F04827-D79C-4D93-A86B-9A0C67CB52C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF5E4CFB-2F40-4B58-9128-CCAB42EDC85D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF5E4CFB-2F40-4B58-9128-CCAB42EDC85D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF5E4CFB-2F40-4B58-9128-CCAB42EDC85D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF5E4CFB-2F40-4B58-9128-CCAB42EDC85D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
