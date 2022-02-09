@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Wuphf.Shared.Appointments
 {
@@ -15,6 +16,9 @@ namespace Wuphf.Shared.Appointments
         public Guid DetailId { get; set; }
 
         public DateTime SchedDateTime { get; set; }
-        public DateTime CompletionDateTime { get; set; }
+        public DateTime? CompletionDateTime { get; set; }
+
+        [NotMapped]
+        public Appointment? Appointment { get; set; }
     }
 }
