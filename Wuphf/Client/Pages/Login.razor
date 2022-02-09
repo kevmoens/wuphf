@@ -60,10 +60,10 @@
 <div class="container">
     <div class="centered-username">
 
-        <input placeholder="username" type="text" @bind-value="username">
+        <input placeholder="username" type="text" @bind-value="username" @onkeyup="Enter">
     </div>
     <div class="centered-password">
-        <input placeholder="password" type="password" @bind-value="password">
+        <input placeholder="password" type="password" @bind-value="password" @onkeyup="Enter" >
     </div>
     <div class="centered-create">
         <button type="button" class="btn btn-outline-primary btn-border centered-create" @onclick="OnLogin">Login</button>
@@ -107,7 +107,13 @@
         PubSub.Hub.Default.Publish<SessionStatusChangedEvent>(new SessionStatusChangedEvent() { Token = content });
         navigationManager.NavigateTo("Home");
     }
-
+    public async void Enter(KeyboardEventArgs e)
+    {
+        if (e.Code == "Enter" || e.Code == "NumpadEnter")
+        {
+            await OnLogin();
+        }
+    }
     public void OnGoBack()
     {
         navigationManager.NavigateTo("");
