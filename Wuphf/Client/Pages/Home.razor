@@ -6,7 +6,7 @@
 {
     @foreach (var dtl in details)
     {
-        <div> @dtl.Appointment?.Description @dtl.SchedDateTime.ToShortDateString() @dtl.SchedDateTime.ToShortTimeString() </div>
+        <div> <h2>@dtl.Appointment?.Description @dtl.SchedDateTime.ToShortDateString() @dtl.SchedDateTime.ToShortTimeString() </h2></div>
     }
 }
 @code {
