@@ -27,5 +27,17 @@ namespace Wuphf.Server.Controllers
         {
             return repository.AppointmentDetails.ToList();
         }
+
+        // GET: to do
+        [HttpGet("{dateTime}")]
+        public IEnumerable<AppointmentDetail> Get(DateTime dateTime)
+        {
+            var details = repository.AppointmentDetails.AsEnumerable().Where(d => d.SchedDateTime <= dateTime && d.CompletionDateTime == null).ToList();
+            foreach (var dtl in details)
+            {
+                dtl.Appointment = repository.Appointments.FirstOrDefault(a => a.AppointmentID == dtl.AppointmentId);                
+            }
+            return details;
+        }
     }
 }

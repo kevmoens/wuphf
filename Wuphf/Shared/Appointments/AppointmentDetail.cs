@@ -19,6 +19,6 @@ namespace Wuphf.Shared.Appointments
         public DateTime? CompletionDateTime { get; set; }
 
         [NotMapped]
-        public Appointment? Appointment { get; set; }
+        public Appointment Appointment { get; set; }
     }
 }

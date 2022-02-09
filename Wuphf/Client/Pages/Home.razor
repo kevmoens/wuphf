@@ -1,6 +1,20 @@
 ﻿@page "/home"
+@inject HttpClient Http
+@using Wuphf.Shared.Appointments
 
-
+@if (details != null)
+{
+    @foreach (var dtl in details)
+    {
+        <div> @dtl.Appointment?.Description @dtl.SchedDateTime.ToShortDateString() @dtl.SchedDateTime.ToShortTimeString() </div>
+    }
+}
 @code {
-
+    private List<AppointmentDetail> details;
+    protected async override Task OnInitializedAsync()
+    {
+        var dtls = await Http.GetFromJsonAsync<AppointmentDetail[]>($"AppointmentDetail/{DateTime.Now.ToString("s")}");
+        this.details = dtls.ToList();
+        StateHasChanged();
+    }
 }
