@@ -1,2 +1,55 @@
-﻿body {
+﻿
+.container {
+    display: grid;
+    grid-template-columns: 20% 15% 136px 15% 20%;
+    grid-template-rows: 200px 130px 240px;
+}
+
+.phone {
+    justify-items: left;
+    width: 200px;
+    height: 150px;
+}
+
+.welcome {
+    margin-top: 75px;
+    grid-column-start: 3;
+}
+
+.AccountContainer {
+    display: grid;
+    grid-column-start: 3;
+    grid-row-start: 2;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    justify-items: center;
+}
+
+.container button {
+    width: 100%;
+}
+
+.laptopCell {
+    grid-column-start: 5;
+    grid-row-start: 2;
+}
+
+.laptop {
+    margin-left: -50px;
+    width: 240px;
+    height: 240px;
+}
+
+.tabletCell {
+    grid-column-start: 1;
+    grid-row-start: 3;
+}
+
+.tablet {
+    width: 240px;
+    height: 240px;
+}
+
+.btn-login {
+    width: auto;
 }
