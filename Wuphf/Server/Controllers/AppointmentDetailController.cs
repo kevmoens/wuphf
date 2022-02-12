@@ -39,5 +39,25 @@ namespace Wuphf.Server.Controllers
             }
             return details;
         }
+
+        // POST values (Add)
+        [HttpPost]
+        public void Post(AppointmentDetail value)
+        {
+            var result = repository.AppointmentDetails.AsEnumerable().FirstOrDefault((a) => a.DetailId == value.DetailId);
+            if (result == null)
+            {
+                //Add
+                repository.AppointmentDetails.Add(value);
+
+                repository.SaveChanges();
+                return;
+            }
+            //Update
+            result.CompletionDateTime = value.CompletionDateTime;
+
+            repository.AppointmentDetails.Update(result);
+            repository.SaveChanges();
+        }
     }
 }

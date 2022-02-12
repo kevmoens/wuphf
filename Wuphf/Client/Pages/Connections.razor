@@ -1,6 +1,26 @@
 ﻿@page "/connections"
+@using Wuphf.Client.Models.Dialog
 <h3>Connections</h3>
 
+        This is my computer quiz?
+
+        What are 1's and 0's called?
+<div>
+    <input type="text" @bind-value="guess" />
+    <button @onclick="@ValidateGuess">Guess</button>
+</div>
+
+
 @code {
+    private string guess;
+    async void ValidateGuess()
+    {
+        if (guess.ToUpper() == "BINARY")
+        {
+            await MsgBox.Show("You are Correct", "Question", Models.Dialog.DialogButtons.OK);
+            return;
+        }
+        await MsgBox.Show("Sorry, try again.", "Question", Models.Dialog.DialogButtons.OK);
+    }
 
 }
