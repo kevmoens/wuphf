@@ -86,7 +86,7 @@ namespace Wuphf.Shared.Appointments
                 }
 
                 firstTime = false;
-                currDate.AddDays(step);
+                currDate = currDate.AddDays(step);
                 if (Appointment.SkipWeekend.GetValueOrDefault())
                 {
                     switch (currDate.DayOfWeek)
