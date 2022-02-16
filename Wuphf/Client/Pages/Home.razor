@@ -12,13 +12,13 @@
     {
         <div><h2>@dtl.Appointment?.Description</h2></div>
         <div> <h2>@dtl.SchedDateTime.ToShortDateString() @dtl.SchedDateTime.ToShortTimeString() </h2></div>
-        <div> <input type="checkbox" @bind="@ticked" @onmouseup="() => {OnDetailsCompleted(dtl); }"/></div>
+        <div> <MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" @onclick="() => {OnDetailsCompleted(dtl); }" /> </div>
+
     }
 </div>
 
 }
 @code {
-    private bool ticked = false;
     private List<AppointmentDetail> details;
     protected async override Task OnInitializedAsync()
     {
@@ -31,8 +31,6 @@
         dtl.CompletionDateTime = DateTime.Now;
         details.Remove(dtl);
         await Http.PostAsJsonAsync<AppointmentDetail>("AppointmentDetail", dtl);
-        StateHasChanged();
-        ticked = false;
         StateHasChanged();
     }
 }
