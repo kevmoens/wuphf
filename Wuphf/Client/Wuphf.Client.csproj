@@ -13,6 +13,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.11" PrivateAssets="all" />
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
     <PackageReference Include="PubSub" Version="4.0.2" />
+    <PackageReference Include="MudBlazor" Version="5.2.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +29,7 @@
     <None Remove="PubSub" />
     <None Remove="Models\Session\" />
     <None Remove="Models\Dialog\" />
+    <None Remove="MudBlazor" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
