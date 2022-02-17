@@ -12,7 +12,7 @@
     {
         <div><h2>@dtl.Appointment?.Description</h2></div>
         <div> <h2>@dtl.SchedDateTime.ToShortDateString() @dtl.SchedDateTime.ToShortTimeString() </h2></div>
-        <div> <MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" @onclick="() => {OnDetailsCompleted(dtl); }" /> </div>
+        <div> <MudFab Color="Color.Primary" StartIcon="@Icons.Filled.Done" @onclick="() => {OnDetailsCompleted(dtl); }" /> </div>
 
     }
 </div>

@@ -114,6 +114,7 @@
             }
             SelectedAppointment = new Appointment();
             hasSelectedAppointment = true;
+            SelectedAppointment.StartDate = DateTime.Today;
             appointments.Add(SelectedAppointment);
             StateHasChanged();
         }
