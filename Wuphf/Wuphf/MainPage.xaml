@@ -3,22 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wuphf.MainPage">
 
-    <StackLayout>
-        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
-        </Frame>
-        <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="30,0,30,0"/>
-        <Label FontSize="16" Padding="30,24,30,0">
-            <Label.FormattedText>
-                <FormattedString>
-                    <FormattedString.Spans>
-                        <Span Text="Learn more at "/>
-                        <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
-                    </FormattedString.Spans>
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
-    </StackLayout>
+   <Grid
+       RowDefinitions="*,Auto,Auto,Auto,Auto,*"
+       ColumnDefinitions="*,Auto,*"
+       >
+
+       <Image Source="https://www.freecatphotoapp.com/your-image.jpg" Grid.Column="2"></Image>
+       <Label Grid.ColumnSpan="3" Grid.Row="1" Text="Wuphf"  FontSize="30" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+       <Entry Grid.ColumnSpan="3" Grid.Row="2" Placeholder="Username" Margin="0,20"/>
+       <Entry Grid.ColumnSpan="3" Grid.Row="3" IsPassword="True" Placeholder="Password" Margin="0,20"/>
+       <Button Grid.ColumnSpan="3" Grid.Row="4" Text="Login" Margin="5,20"/>
+
+    </Grid>
 
 </ContentPage>

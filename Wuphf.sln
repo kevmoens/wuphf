@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wuphf.Android", "Wuphf\Wuph
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wuphf.iOS", "Wuphf\Wuphf.iOS\Wuphf.iOS.csproj", "{49D4FC6B-0777-4BAB-BFFC-24BEDEA1ADE3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wuphf.MVVM", "Wuphf.MVVM\Wuphf.MVVM.csproj", "{20FD74DC-95F4-46C1-B0BC-DEBA1616B069}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +113,18 @@ Global
 		{49D4FC6B-0777-4BAB-BFFC-24BEDEA1ADE3}.Debug|iPhone.Build.0 = Debug|iPhone
 		{49D4FC6B-0777-4BAB-BFFC-24BEDEA1ADE3}.Release|iPhone.ActiveCfg = Release|iPhone
 		{49D4FC6B-0777-4BAB-BFFC-24BEDEA1ADE3}.Release|iPhone.Build.0 = Release|iPhone
+		{20FD74DC-95F4-46C1-B0BC-DEBA1616B069}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20FD74DC-95F4-46C1-B0BC-DEBA1616B069}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20FD74DC-95F4-46C1-B0BC-DEBA1616B069}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20FD74DC-95F4-46C1-B0BC-DEBA1616B069}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20FD74DC-95F4-46C1-B0BC-DEBA1616B069}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{20FD74DC-95F4-46C1-B0BC-DEBA1616B069}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{20FD74DC-95F4-46C1-B0BC-DEBA1616B069}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{20FD74DC-95F4-46C1-B0BC-DEBA1616B069}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{20FD74DC-95F4-46C1-B0BC-DEBA1616B069}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{20FD74DC-95F4-46C1-B0BC-DEBA1616B069}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{20FD74DC-95F4-46C1-B0BC-DEBA1616B069}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{20FD74DC-95F4-46C1-B0BC-DEBA1616B069}.Release|iPhone.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
