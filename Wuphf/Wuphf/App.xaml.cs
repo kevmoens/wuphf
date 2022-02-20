@@ -17,7 +17,9 @@ namespace Wuphf
 
             ConfigureServices();
             ViewModelLocator.ServiceProvider = ServiceProvider;
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new Views.MainPage());
+            RegionManager.SetRegionName(MainPage, "MainRegion");
+            RegionManager.SetServiceProvider(MainPage, ServiceProvider);
         }
 
         protected override void OnStart()
@@ -38,9 +40,17 @@ namespace Wuphf
             IServiceCollection services = new ServiceCollection();
             services
                 .AddSingleton<RegionService>()
+                .AddTransient<Views.MainPage>()
+                .AddTransient<Views.AppointmentsPage>()
+                .AddTransient<Views.HomePage>()
+                .AddTransient<ViewModels.AppointmentsPageViewModel>()
+                .AddTransient<ViewModels.HomePageViewModel>()
+                .AddTransient<ViewModels.MainPageViewModel>()
             ;
             services.AddByName<Page>()
-                //.Add<Views.MainWindow>("MainWindow")
+                .Add<Views.MainPage>("Main")
+                .Add<Views.AppointmentsPage>("Appointments")
+                .Add<Views.HomePage>("Home")
                 //.Add<Views.Connections>("Connections")
                 //.Add<Views.ConnectionNew>("ConnectionNew")
                 //.Add<Views.ConnectionEditFileSystem>("ConnectionEditFileSystem")

@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Wuphf.MVVM
 {
 
-    public class RegionManager : Frame
+    public class RegionManager : NavigationPage
     {
         public static IServiceProvider GetServiceProvider(BindableObject Obj)
         {
@@ -17,7 +17,7 @@ namespace Wuphf.MVVM
         }
 
         public static readonly BindableProperty ServiceProviderProperty = BindableProperty.CreateAttached("ServiceProvider",
-                 typeof(IServiceProvider), typeof(RegionManager), BindingMode.TwoWay, propertyChanged:  OnServiceProviderChanged);
+                 typeof(IServiceProvider), typeof(RegionManager), null, BindingMode.TwoWay, propertyChanged:  OnServiceProviderChanged);
 
         public static void OnServiceProviderChanged(BindableObject d, object oldValue, object newValue )
         {
@@ -35,7 +35,7 @@ namespace Wuphf.MVVM
         }
 
         public static readonly BindableProperty RegionNameProperty = BindableProperty.CreateAttached("RegionName",
-                 typeof(string), typeof(RegionManager), BindingMode.TwoWay, propertyChanged: OnRegionNameChanged);
+                 typeof(string), typeof(RegionManager), string.Empty, BindingMode.TwoWay, propertyChanged: OnRegionNameChanged);
 
 
 
@@ -52,7 +52,7 @@ namespace Wuphf.MVVM
             var regionService = serviceProvider.GetService<RegionService>();
             if (regionService != null && !regionService.NavigationServices.ContainsKey(regionName))
             {
-                regionService.NavigationServices.Add(regionName, new XFNavigationService((Frame)obj));
+                regionService.NavigationServices.Add(regionName, new XFNavigationService((NavigationPage)obj));
             }
         }
     }

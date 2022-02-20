@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Neleus.DependencyInjection.Extensions;
 using Xamarin.Forms;
@@ -23,7 +24,7 @@ namespace Wuphf.MVVM
             this.logger = logger;
         }
         public Dictionary<string, INavigation> NavigationServices { get; set; } = new Dictionary<string, INavigation>(System.StringComparer.InvariantCultureIgnoreCase);
-        public void Navigate(string RegionName, string ViewName, Dictionary<string, object> parameters = null)
+        public async Task Navigate(string RegionName, string ViewName, Dictionary<string, object> parameters = null)
         {
             //Need Neuleus so I can register a class that wraps the view so I can pull it back up.
             //Have to make a extension method for Registering the new.
@@ -44,7 +45,7 @@ namespace Wuphf.MVVM
             }
 
 
-            NavigationServices[RegionName].PushAsync(view);
+            await NavigationServices[RegionName].PushAsync(view);
             if (parameters == null)
             {
                 parameters = new Dictionary<string, object>();

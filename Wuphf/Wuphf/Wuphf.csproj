@@ -15,6 +15,7 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
     <PackageReference Include="NLog.Extensions.Logging" Version="1.7.4" />
     <PackageReference Include="NLog" Version="4.7.13" />
+    <PackageReference Include="Behaviors.Forms" Version="1.4.0" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Prism.Unity.Forms" />
@@ -22,6 +23,7 @@
     <None Remove="NLog" />
     <None Remove="Views\" />
     <None Remove="ViewModels\" />
+    <None Remove="Behaviors.Forms" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Wuphf.MVVM\Wuphf.MVVM.csproj" />
