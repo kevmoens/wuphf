@@ -1,22 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <SupportedPlatform Include="browser" />
+    <None Remove="System.ComponentModel.Annotations" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
-    <None Remove="Session\" />
-    <None Remove="Appointments\" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.13" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Session\" />
-    <Folder Include="Appointments\" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
   </ItemGroup>
 </Project>
