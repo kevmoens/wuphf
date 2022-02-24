@@ -12,8 +12,8 @@
 
            <Image Source="https://www.freecatphotoapp.com/your-image.jpg" Grid.Column="2"></Image>
            <Label Grid.ColumnSpan="3" Grid.Row="1" Text="Wuphf"  FontSize="30" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
-           <Entry Grid.ColumnSpan="3" Grid.Row="2" Placeholder="Username" Margin="0,20"/>
-           <Entry Grid.ColumnSpan="3" Grid.Row="3" IsPassword="True" Placeholder="Password" Margin="0,20"/>
+           <Entry Grid.ColumnSpan="3" Grid.Row="2" Placeholder="Username" Margin="0,20" Text="{Binding UserName}"/>
+           <Entry Grid.ColumnSpan="3" Grid.Row="3" IsPassword="True" Placeholder="Password" Margin="0,20" Text="{Binding Password}"/>
            <Button Grid.ColumnSpan="3" Grid.Row="4" Text="Login" Margin="5,20" Command="{Binding LoginCommand}"/>
         </Grid>
     </ContentPage.Content>

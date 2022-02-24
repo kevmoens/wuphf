@@ -16,6 +16,8 @@
     <PackageReference Include="NLog.Extensions.Logging" Version="1.7.4" />
     <PackageReference Include="NLog" Version="4.7.13" />
     <PackageReference Include="Behaviors.Forms" Version="1.4.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Neleus.DependencyInjection.Extensions" Version="1.0.4" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Prism.Unity.Forms" />
@@ -24,8 +26,12 @@
     <None Remove="Views\" />
     <None Remove="ViewModels\" />
     <None Remove="Behaviors.Forms" />
+    <None Remove="System.Net.Http" />
+    <None Remove="Newtonsoft.Json" />
+    <None Remove="Neleus.DependencyInjection.Extensions" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Shared\Wuphf.Shared.csproj" />
     <ProjectReference Include="..\..\Wuphf.MVVM\Wuphf.MVVM.csproj" />
   </ItemGroup>
   <ItemGroup>
