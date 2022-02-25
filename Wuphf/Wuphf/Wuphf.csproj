@@ -29,6 +29,9 @@
     <None Remove="System.Net.Http" />
     <None Remove="Newtonsoft.Json" />
     <None Remove="Neleus.DependencyInjection.Extensions" />
+    <None Remove="Models\" />
+    <None Remove="appsettings.json" />
+    <None Remove="App\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shared\Wuphf.Shared.csproj" />
@@ -37,5 +40,10 @@
   <ItemGroup>
     <Folder Include="Views\" />
     <Folder Include="ViewModels\" />
+    <Folder Include="Models\" />
+    <Folder Include="App\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="appsettings.json" />
   </ItemGroup>
 </Project>

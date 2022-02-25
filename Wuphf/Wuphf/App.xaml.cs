@@ -8,7 +8,7 @@ using Xamarin.Forms.Xaml;
 
 namespace Wuphf
 {
-    public partial class App : Application
+    public partial class App : Xamarin.Forms.Application
     {
         internal static IServiceProvider ServiceProvider { get; set; }
         public App()

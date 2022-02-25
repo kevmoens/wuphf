@@ -53,12 +53,13 @@ namespace Wuphf.ViewModels
         }
         public async void OnLogin()
         {
-            HttpClient client = new HttpClient(); // { BaseAddress = new Uri("https://localhost:5003") };
+            HttpClient client = new HttpClient(); 
             LoginRequest login = new LoginRequest();
             login.UserName = UserName;
             login.Password = Password;
             var loginJson = Newtonsoft.Json.JsonConvert.SerializeObject(login);
-            var result = await client.PostAsync($"http://localhost:5002/Account/{UserName}", new StringContent(loginJson, Encoding.UTF8, "application/json"));
+            string url = Wuphf.Application.AppSettingsManager.Settings["WuphfUrl"];
+            var result = await client.PostAsync($"{url}Account/{UserName}", new StringContent(loginJson, Encoding.UTF8, "application/json"));
             if (!result.IsSuccessStatusCode)
             {
                 System.Diagnostics.Debug.Print(result.ReasonPhrase);
@@ -68,7 +69,7 @@ namespace Wuphf.ViewModels
             Guid token = Guid.Empty;
             if (!string.IsNullOrEmpty(content) && !Guid.TryParse(content, out token))
             {
-                await Application.Current.MainPage.DisplayAlert("Error",content, "OK");
+                await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Error",content, "OK");
                 return;
             }
             regionService?.Navigate("MainRegion", "Appointments");
