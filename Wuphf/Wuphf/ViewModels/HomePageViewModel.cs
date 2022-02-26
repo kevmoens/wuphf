@@ -1,12 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Net.Http;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Windows.Input;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Wuphf.Models.Login;
+using Wuphf.Repository.Login;
 using Wuphf.MVVM;
 using Wuphf.Shared;
 using Xamarin.Forms;

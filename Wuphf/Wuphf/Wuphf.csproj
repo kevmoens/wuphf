@@ -33,6 +33,7 @@
     <None Remove="appsettings.json" />
     <None Remove="App\" />
     <None Remove="Models\Login\" />
+    <None Remove="Models\AppointmentDetails\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shared\Wuphf.Shared.csproj" />
@@ -44,6 +45,7 @@
     <Folder Include="Models\" />
     <Folder Include="App\" />
     <Folder Include="Models\Login\" />
+    <Folder Include="Models\Appointments\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="appsettings.json" />

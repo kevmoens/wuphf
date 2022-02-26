@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Wuphf.Shared;
 
-namespace Wuphf.Models.Login
+namespace Wuphf.Repository.Login
 {
     public class Login
     {
