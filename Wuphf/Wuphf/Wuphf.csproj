@@ -32,6 +32,7 @@
     <None Remove="Models\" />
     <None Remove="appsettings.json" />
     <None Remove="App\" />
+    <None Remove="Models\Login\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shared\Wuphf.Shared.csproj" />
@@ -42,6 +43,7 @@
     <Folder Include="ViewModels\" />
     <Folder Include="Models\" />
     <Folder Include="App\" />
+    <Folder Include="Models\Login\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="appsettings.json" />

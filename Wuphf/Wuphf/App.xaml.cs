@@ -17,7 +17,7 @@ namespace Wuphf
 
             ConfigureServices();
             ViewModelLocator.ServiceProvider = ServiceProvider;
-            MainPage = new NavigationPage(new Views.MainPage());
+            MainPage = new NavigationPage(new Views.HomePage());
             RegionManager.SetRegionName(MainPage, "MainRegion");
             RegionManager.SetServiceProvider(MainPage, ServiceProvider);
         }

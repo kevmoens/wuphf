@@ -6,6 +6,7 @@ using System.Text;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Wuphf.Models.Login;
 using Wuphf.MVVM;
 using Wuphf.Shared;
 using Xamarin.Forms;
@@ -53,26 +54,20 @@ namespace Wuphf.ViewModels
         }
         public async void OnLogin()
         {
-            HttpClient client = new HttpClient(); 
-            LoginRequest login = new LoginRequest();
-            login.UserName = UserName;
-            login.Password = Password;
-            var loginJson = Newtonsoft.Json.JsonConvert.SerializeObject(login);
-            string url = Wuphf.Application.AppSettingsManager.Settings["WuphfUrl"];
-            var result = await client.PostAsync($"{url}Account/{UserName}", new StringContent(loginJson, Encoding.UTF8, "application/json"));
-            if (!result.IsSuccessStatusCode)
-            {
-                System.Diagnostics.Debug.Print(result.ReasonPhrase);
-                return;
-            }
-            var content = await result.Content.ReadAsStringAsync();
             Guid token = Guid.Empty;
-            if (!string.IsNullOrEmpty(content) && !Guid.TryParse(content, out token))
+            Login login = new Login();
+            try
             {
-                await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Error",content, "OK");
+                await login.Process(new LoginRequest() { UserName = UserName, Password = Password });
+            } catch (Exception ex)
+            {
+                await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
                 return;
             }
-            regionService?.Navigate("MainRegion", "Appointments");
+            var navigation = regionService.NavigationServices["MainRegion"];
+            Page page = navigation.NavigationStack[navigation.NavigationStack.Count - 1];
+            await regionService?.Navigate("MainRegion", "Appointments");
+            navigation.RemovePage(page);
         }
     }
 }
