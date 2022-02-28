@@ -40,10 +40,12 @@ namespace Wuphf
             IServiceCollection services = new ServiceCollection();
             services
                 .AddSingleton<RegionService>()
-                .AddTransient<Views.MainPage>()
                 .AddTransient<Views.AppointmentsPage>()
+                .AddTransient<Views.CreateAppointmentsPage>()
+                .AddTransient<Views.MainPage>()
                 .AddTransient<Views.HomePage>()
                 .AddTransient<ViewModels.AppointmentsPageViewModel>()
+                .AddTransient<ViewModels.CreateAppointmentsPageViewModel>()
                 .AddTransient<ViewModels.HomePageViewModel>()
                 .AddTransient<ViewModels.MainPageViewModel>()
             ;
@@ -51,6 +53,7 @@ namespace Wuphf
                 .Add<Views.MainPage>("Main")
                 .Add<Views.AppointmentsPage>("Appointments")
                 .Add<Views.HomePage>("Home")
+                .Add<Views.CreateAppointmentsPage>("CreateAppointments")
                 //.Add<Views.Connections>("Connections")
                 //.Add<Views.ConnectionNew>("ConnectionNew")
                 //.Add<Views.ConnectionEditFileSystem>("ConnectionEditFileSystem")

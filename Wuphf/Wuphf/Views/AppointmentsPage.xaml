@@ -19,9 +19,16 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
             <Label Text="Appointments"/>
+            <Button Grid.Column="1" Text="Edit" Command="{Binding EditAppointmentsCommand}"/>
             <ListView
                 Grid.Row="1"
+                Grid.ColumnSpan="3"
                 ItemsSource="{Binding AppointmentDetails}"
                 >
                 <ListView.ItemTemplate>

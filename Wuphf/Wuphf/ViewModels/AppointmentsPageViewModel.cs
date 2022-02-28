@@ -18,7 +18,7 @@ namespace Wuphf.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
         RegionService regionService;
-        ILogger<HomePageViewModel> logger;
+        ILogger<AppointmentsPageViewModel> logger;
 
         private IServiceProvider serviceProvider;
         public IServiceProvider ServiceProvider
@@ -35,9 +35,10 @@ namespace Wuphf.ViewModels
         }
         public ICommand AppearingCommand { get; set; }
         public ICommand CompleteCommand { get; set; }
+        public ICommand EditAppointmentsCommand { get; set; }
         public AppointmentsPageViewModel(IServiceProvider serviceProvider
             , RegionService regionService
-            , ILogger<HomePageViewModel> logger
+            , ILogger<AppointmentsPageViewModel> logger
             )
         {
             this.ServiceProvider = serviceProvider;
@@ -45,6 +46,7 @@ namespace Wuphf.ViewModels
             this.logger = logger;
             AppearingCommand = new DelegateCommand(OnAppearing);
             CompleteCommand = new DelegateCommand<AppointmentDetail>(OnComplete);
+            EditAppointmentsCommand = new DelegateCommand(OnEdit);
         }
         public async void OnComplete(AppointmentDetail detail)
         {
@@ -60,6 +62,11 @@ namespace Wuphf.ViewModels
             {
                 AppointmentDetails.Add(dtl);
             }
+        }
+        public async void OnEdit()
+        {
+            regionService.Navigate("MainRegion", "CreateAppointments");
+
         }
     }
 }
