@@ -65,7 +65,7 @@ namespace Wuphf.ViewModels
         }
         public async void OnEdit()
         {
-            regionService.Navigate("MainRegion", "CreateAppointments");
+            await regionService.Navigate("MainRegion", "CreateAppointments");
 
         }
     }
