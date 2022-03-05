@@ -37,7 +37,7 @@ namespace Wuphf.Server.Controllers
             {
                 dtl.Appointment = repository.Appointments.FirstOrDefault(a => a.AppointmentID == dtl.AppointmentId);                
             }
-            return details;
+            return details.OrderBy((d) => { return d.SchedDateTime; });
         }
 
         // POST values (Add)
