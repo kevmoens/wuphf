@@ -8,11 +8,13 @@
     <div><h2>Task</h2></div>
     <div><h2>Time</h2></div>
     <div><h2>Complete</h2></div>
+    <div><h2>Delay</h2></div>
     @foreach (var dtl in details)
     {
         <div><h2>@dtl.Appointment?.Description</h2></div>
         <div> <h2>@dtl.SchedDateTime.ToShortDateString() @dtl.SchedDateTime.ToShortTimeString() </h2></div>
         <div> <MudFab Color="Color.Primary" StartIcon="@Icons.Filled.Done" @onclick="() => {OnDetailsCompleted(dtl); }" /> </div>
+        <div> <MudFab Color="Color.Primary" StartIcon="@Icons.Filled.WatchLater" @onclick="() => {OnDetailsDelay(dtl); }" /> </div>
 
     }
 </div>
@@ -32,5 +34,9 @@
         details.Remove(dtl);
         await Http.PostAsJsonAsync<AppointmentDetail>("AppointmentDetail", dtl);
         StateHasChanged();
+    }
+    public void OnDetailsDelay(AppointmentDetail dtl)
+    {
+
     }
 }
