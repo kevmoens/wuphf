@@ -35,8 +35,11 @@
         await Http.PostAsJsonAsync<AppointmentDetail>("AppointmentDetail", dtl);
         StateHasChanged();
     }
-    public void OnDetailsDelay(AppointmentDetail dtl)
+    public async void OnDetailsDelay(AppointmentDetail dtl)
     {
-
+        await Http.PostAsJsonAsync<AppointmentDetail>("AppointmentDetail/Delay", dtl);
+        var dtls = await Http.GetFromJsonAsync<AppointmentDetail[]>($"AppointmentDetail/{DateTime.Now.ToString("s")}");
+        this.details = dtls.ToList();
+        StateHasChanged();
     }
 }
