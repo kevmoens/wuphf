@@ -75,7 +75,7 @@ namespace Wuphf.Server.Controllers
                 return;
             }
             //Update
-            result.CompletionDateTime = value.CompletionDateTime;
+            result.SchedDateTime = UpdateDateTime(appt, result.SchedDateTime); 
             repository.AppointmentDetails.Update(result);
 
             if (appt.Reoccurance != Shared.ReoccuranceTypes.None)
