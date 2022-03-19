@@ -66,6 +66,12 @@ namespace Wuphf.Server.Controllers
             {
                 return "Invalid Password";
             }
+            var sessions = repository.Sessions.AsEnumerable()
+                .Where((session) => session.UserName.ToUpperInvariant() == login.UserName.ToUpperInvariant()).ToList();
+            foreach (var session in sessions)
+            {
+                repository.Sessions.Remove(session);
+            }
             var sess = new Shared.Session.Session() { Token = Guid.NewGuid().ToString(), UserName = login.UserName };
             repository.Sessions.Add(sess);
             repository.SaveChanges();
