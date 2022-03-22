@@ -1,8 +1,7 @@
 ﻿@page "/appointments"
-@inject HttpClient Http
 @using Wuphf.Shared
 @using Wuphf.Shared.Appointments
-@using Wuphf.Client.Models
+@inject IAppointmentsRepo Appts
 
 <div class="container">
     <div class="listContainer">
@@ -15,7 +14,7 @@
                 <td></td>
                 </thead>
                 <tbody>
-                    @foreach (var appt in appointments)
+                    @foreach (var appt in Appts.Appointments)
                     {
                         <tr>
                             <td>@appt.Description</td>
@@ -38,21 +37,21 @@
 
 
     <div class="detailContainer">
-        @if (hasSelectedAppointment)
+        @if (Appts.HasSelectedAppointment)
         {
-            <EditForm Model="@selectedAppointment" OnValidSubmit="@HandleValidSubmit">
+            <EditForm Model="@Appts.SelectedAppointment" OnValidSubmit="@HandleValidSubmit">
                 <DataAnnotationsValidator />
                 <ValidationSummary />
 
                 
                 <div>
-                    <input type="text" @bind-value="selectedAppointment.Description" />
-                    Time: <input type="time" @bind-value="selectedAppointment.ScheduleTime" />
+                    <input type="text" @bind-value="Appts.SelectedAppointment.Description" />
+                    Time: <input type="time" @bind-value="Appts.SelectedAppointment.ScheduleTime" />
                 </div>
                 <div class="reoccuranceContainer">
                     <div>
                         Reoccurance:<br />
-                        <InputRadioGroup Name="reoccurance" @bind-Value="selectedAppointment.Reoccurance">
+                        <InputRadioGroup Name="reoccurance" @bind-Value="Appts.SelectedAppointment.Reoccurance">
                             <InputRadio Name="reoccurance" Value="ReoccuranceTypes.None" />
                             None<br>
                             <InputRadio Name="reoccurance" Value="ReoccuranceTypes.Daily" />
@@ -63,30 +62,30 @@
                     </div>
                     <div>
                         <div>
-                            <input type="checkbox" @bind="dayOfWeekAppointment.Sunday"/> Sunday
+                            <input type="checkbox" @bind="Appts.DayOfWeekAppointment.Sunday"/> Sunday
                         </div>
                         <div>
-                            <input type="checkbox" @bind="dayOfWeekAppointment.Monday" /> Monday
+                            <input type="checkbox" @bind="Appts.DayOfWeekAppointment.Monday" /> Monday
                         </div>
                         <div>
-                            <input type="checkbox" @bind="dayOfWeekAppointment.Tuesday" /> Tuesday
+                            <input type="checkbox" @bind="Appts.DayOfWeekAppointment.Tuesday" /> Tuesday
                         </div>
                         <div>
-                            <input type="checkbox" @bind="dayOfWeekAppointment.Wednesday" /> Wednesday
+                            <input type="checkbox" @bind="Appts.DayOfWeekAppointment.Wednesday" /> Wednesday
                         </div>
                         <div>
-                            <input type="checkbox" @bind="dayOfWeekAppointment.Thursday" /> Thursday
+                            <input type="checkbox" @bind="Appts.DayOfWeekAppointment.Thursday" /> Thursday
                         </div>
                         <div>
-                            <input type="checkbox" @bind="dayOfWeekAppointment.Friday" /> Friday
+                            <input type="checkbox" @bind="Appts.DayOfWeekAppointment.Friday" /> Friday
                         </div>
                         <div>
-                            <input type="checkbox" @bind="dayOfWeekAppointment.Saturday" /> Saturday
+                            <input type="checkbox" @bind="Appts.DayOfWeekAppointment.Saturday" /> Saturday
                         </div>
                     </div>
                 </div>
                 <div>
-                    End Date: <input type="date" @bind-value="selectedAppointment.EndDate" />
+                    End Date: <input type="date" @bind-value="Appts.SelectedAppointment.EndDate" />
                 </div>
                 <div>
                     <button class="btn btn-primary" type="submit">Save</button>
@@ -96,51 +95,5 @@
     </div>
 </div>
     @code {
-        private bool hasSelectedAppointment;
-        private Appointment selectedAppointment;
-        public Appointment SelectedAppointment { get { return selectedAppointment; } set { selectedAppointment = value; dayOfWeekAppointment.Appointment = value; } }
-        private DayOfWeekAppointment dayOfWeekAppointment = new DayOfWeekAppointment();
-        private List<Appointment> appointments = new List<Appointment>();
-        protected override async Task OnInitializedAsync()
-        {
-            var result = await Http.GetFromJsonAsync<Appointment[]>("Appointment");
-            appointments = result?.ToList();
-        }
-        public void OnAdd()
-        {
-            if (appointments == null)
-            {
-                appointments = new List<Appointment>();
-            }
-            SelectedAppointment = new Appointment();
-            hasSelectedAppointment = true;
-            SelectedAppointment.StartDate = DateTime.Today;
-            appointments.Add(SelectedAppointment);
-            StateHasChanged();
-        }
-        public void OnEdit(Appointment appt)
-        {
-            SelectedAppointment = appt;
-            hasSelectedAppointment = true;
-            StateHasChanged();
-        }
-        public async void OnRemove(Appointment appt)
-        {
-            await Http.DeleteAsync($"Appointment/{appt.AppointmentID}");
-            appointments.Remove(appt);
-            if (appt == selectedAppointment)
-            {
-                selectedAppointment = null;
-                hasSelectedAppointment = false;
-            }
-            StateHasChanged();
-        }
-
-        private async void HandleValidSubmit()
-        {
-            //Add or Update
-            await Http.PostAsJsonAsync<Appointment>("Appointment", selectedAppointment);
-        }
-
 
     }

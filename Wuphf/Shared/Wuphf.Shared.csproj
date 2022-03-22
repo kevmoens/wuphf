@@ -6,8 +6,10 @@
 
   <ItemGroup>
     <None Remove="System.ComponentModel.Annotations" />
+    <None Remove="System.Net.Http.Json" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
   </ItemGroup>
 </Project>

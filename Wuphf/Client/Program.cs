@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Wuphf.Shared.Session;
+using Wuphf.Shared.Appointments;
 
 namespace Wuphf.Client
 {
@@ -22,6 +23,7 @@ namespace Wuphf.Client
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.Configuration["serverUrl"]) });
             builder.Services.AddMudServices();
             builder.Services.AddSingleton<Session>();
+            builder.Services.AddTransient<IAppointmentsRepo, AppointmentsRepo>();
             await builder.Build().RunAsync();
         }
     }

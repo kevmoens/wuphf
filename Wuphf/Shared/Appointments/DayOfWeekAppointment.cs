@@ -2,7 +2,7 @@
 using Wuphf.Shared;
 using Wuphf.Shared.Appointments;
 
-namespace Wuphf.Client.Models
+namespace Wuphf.Shared.Appointments
 {
     public class DayOfWeekAppointment
     {
