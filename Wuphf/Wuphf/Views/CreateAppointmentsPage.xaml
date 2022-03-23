@@ -10,7 +10,7 @@
         </behaviors:EventHandlerBehavior>
     </ContentPage.Behaviors>
     <ContentPage.Content>
-        <ListView ItemsSource="{Binding Appointments}">
+        <ListView ItemsSource="{Binding AppointmentsRepo.Appointments}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

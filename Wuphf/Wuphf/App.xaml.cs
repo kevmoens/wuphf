@@ -5,6 +5,8 @@ using Neleus.DependencyInjection.Extensions;
 using Wuphf.MVVM;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Wuphf.Shared.Appointments;
+using System.Net.Http;
 
 namespace Wuphf
 {
@@ -40,6 +42,8 @@ namespace Wuphf
             IServiceCollection services = new ServiceCollection();
             services
                 .AddSingleton<RegionService>()
+                .AddScoped(sp => new HttpClient { BaseAddress = new Uri(Wuphf.Application.AppSettingsManager.Settings["WuphfUrl"].TrimEnd('/')) })
+                .AddTransient<IAppointmentsRepo, AppointmentsRepo>()
                 .AddTransient<Views.AppointmentsPage>()
                 .AddTransient<Views.CreateAppointmentsPage>()
                 .AddTransient<Views.MainPage>()

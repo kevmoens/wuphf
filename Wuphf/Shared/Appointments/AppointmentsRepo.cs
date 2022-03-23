@@ -68,10 +68,15 @@ namespace Wuphf.Shared.Appointments
             var result = await http.GetFromJsonAsync<Appointment[]>("Appointment");
             if (result == null)
             {
-                appointments = new ObservableCollection<Appointment>();
+                Appointments = new ObservableCollection<Appointment>();
                 return;
             }
-            appointments = new ObservableCollection<Appointment>(result.ToList());
+            var apts = result?.ToList();
+            if (apts == null)
+            {
+                Appointments = new ObservableCollection<Appointment>();
+            }
+            Appointments = new ObservableCollection<Appointment>(apts);
         }
         public void OnAdd()
         {
