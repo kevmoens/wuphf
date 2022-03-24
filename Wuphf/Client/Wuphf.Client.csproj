@@ -14,6 +14,7 @@
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
     <PackageReference Include="PubSub" Version="4.0.2" />
     <PackageReference Include="MudBlazor" Version="5.2.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +31,7 @@
     <None Remove="Models\Session\" />
     <None Remove="Models\Dialog\" />
     <None Remove="MudBlazor" />
+    <None Remove="Newtonsoft.Json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

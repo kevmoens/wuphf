@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Wuphf.Shared.Session;
 using Wuphf.Shared.Appointments;
+using Wuphf.Shared.Configuration;
 
 namespace Wuphf.Client
 {
@@ -20,6 +21,7 @@ namespace Wuphf.Client
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
 
+            builder.Services.AddSingleton<IAppSettings, AppSettings>(sp => new AppSettings { WuphfURL = builder.Configuration["serverUrl"] });
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.Configuration["serverUrl"]) });
             builder.Services.AddMudServices();
             builder.Services.AddSingleton<Session>();

@@ -7,6 +7,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Wuphf.Shared.Appointments;
 using System.Net.Http;
+using Wuphf.Shared.Configuration;
 
 namespace Wuphf
 {
@@ -18,7 +19,10 @@ namespace Wuphf
             InitializeComponent();
 
             ConfigureServices();
+
             ViewModelLocator.ServiceProvider = ServiceProvider;
+            var appSettings = ServiceProviderServiceExtensions.GetService<IAppSettings>(ServiceProvider);
+            appSettings.WuphfURL = Wuphf.Application.AppSettingsManager.Settings["WuphfUrl"].TrimEnd('/');
             MainPage = new NavigationPage(new Views.HomePage());
             RegionManager.SetRegionName(MainPage, "MainRegion");
             RegionManager.SetServiceProvider(MainPage, ServiceProvider);
@@ -42,7 +46,8 @@ namespace Wuphf
             IServiceCollection services = new ServiceCollection();
             services
                 .AddSingleton<RegionService>()
-                .AddScoped(sp => new HttpClient { BaseAddress = new Uri(Wuphf.Application.AppSettingsManager.Settings["WuphfUrl"].TrimEnd('/')) })
+                .AddSingleton<IAppSettings, AppSettings>()
+                .AddScoped(sp => new HttpClient())
                 .AddTransient<IAppointmentsRepo, AppointmentsRepo>()
                 .AddTransient<Views.AppointmentsPage>()
                 .AddTransient<Views.CreateAppointmentsPage>()

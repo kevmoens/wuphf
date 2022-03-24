@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -6,14 +7,17 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Wuphf.Shared.Configuration;
 
 namespace Wuphf.Shared.Appointments
 {
     public class AppointmentsRepo : INotifyPropertyChanged, IAppointmentsRepo
     {
-        public AppointmentsRepo(HttpClient http)
+        private IAppSettings appSettings;
+        public AppointmentsRepo(HttpClient http, IAppSettings appSettings)
         {
             this.http = http;
+            this.appSettings = appSettings;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -65,18 +69,13 @@ namespace Wuphf.Shared.Appointments
 
         public async Task GetAppointments()
         {
-            var result = await http.GetFromJsonAsync<Appointment[]>("Appointment");
-            if (result == null)
-            {
-                Appointments = new ObservableCollection<Appointment>();
-                return;
-            }
-            var apts = result?.ToList();
-            if (apts == null)
+            var contents = JsonConvert.DeserializeObject<Wuphf.Shared.Appointments.Appointment[]>(await http.GetStringAsync($"{appSettings.WuphfURL}/Appointment"));
+
+            if (contents == null)
             {
                 Appointments = new ObservableCollection<Appointment>();
             }
-            Appointments = new ObservableCollection<Appointment>(apts);
+            Appointments = new ObservableCollection<Appointment>(contents);
         }
         public void OnAdd()
         {
