@@ -19,6 +19,7 @@ namespace Wuphf.ViewModels
         }
         RegionService regionService;
         public ICommand AppearingCommand { get; set; }
+        public ICommand EditCommand { get; set; }
         ILogger<CreateAppointmentsPageViewModel> logger;
 
         private IServiceProvider serviceProvider;
@@ -44,11 +45,17 @@ namespace Wuphf.ViewModels
             this.logger = logger;
             AppointmentsRepo = appointmentsRepo;
             AppearingCommand = new DelegateCommand(OnAppearing);
+            EditCommand = new DelegateCommand(OnEdit);
         }
         public async void OnAppearing()
         {
             await AppointmentsRepo.GetAppointments();
             
+        }
+        public async void OnEdit()
+        {
+            await App.Current.MainPage.DisplayAlert("YourApp", "EDIT", "Ok");
+
         }
     }
 }

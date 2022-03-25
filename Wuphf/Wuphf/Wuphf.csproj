@@ -41,6 +41,7 @@
     <None Remove="System.Net.Http.Json" />
     <None Remove="System.Memory" />
     <None Remove="System.Buffers" />
+    <None Remove="Behaviors\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shared\Wuphf.Shared.csproj" />
@@ -53,6 +54,7 @@
     <Folder Include="App\" />
     <Folder Include="Models\Login\" />
     <Folder Include="Models\Appointments\" />
+    <Folder Include="Behaviors\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="appsettings.json" />
