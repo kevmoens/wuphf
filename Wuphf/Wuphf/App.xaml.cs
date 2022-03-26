@@ -8,6 +8,8 @@ using Xamarin.Forms.Xaml;
 using Wuphf.Shared.Appointments;
 using System.Net.Http;
 using Wuphf.Shared.Configuration;
+using Wuphf.Shared.Dialog;
+using Wuphf.Dialog;
 
 namespace Wuphf
 {
@@ -49,6 +51,7 @@ namespace Wuphf
                 .AddSingleton<IAppSettings, AppSettings>()
                 .AddScoped(sp => new HttpClient())
                 .AddTransient<IAppointmentsRepo, AppointmentsRepo>()
+                .AddSingleton<IMsgBox, MsgBox>()
                 .AddTransient<Views.AppointmentsPage>()
                 .AddTransient<Views.AppointmentDetailsPage>()
                 .AddTransient<Views.MainPage>()

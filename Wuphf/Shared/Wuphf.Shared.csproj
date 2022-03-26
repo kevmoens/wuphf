@@ -9,6 +9,7 @@
     <None Remove="System.Net.Http.Json" />
     <None Remove="Configuration\" />
     <None Remove="Newtonsoft.Json" />
+    <None Remove="Dialog\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
@@ -17,5 +18,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Configuration\" />
+    <Folder Include="Dialog\" />
   </ItemGroup>
 </Project>

@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Wuphf.Client.Models.Dialog
+namespace Wuphf.Shared.Dialog
 {
     public enum DialogButtons
     {

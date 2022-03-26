@@ -11,6 +11,8 @@ using Microsoft.Extensions.Logging;
 using Wuphf.Shared.Session;
 using Wuphf.Shared.Appointments;
 using Wuphf.Shared.Configuration;
+using Wuphf.Shared.Dialog;
+using Wuphf.Client.Models.Dialog;
 
 namespace Wuphf.Client
 {
@@ -26,6 +28,7 @@ namespace Wuphf.Client
             builder.Services.AddMudServices();
             builder.Services.AddSingleton<Session>();
             builder.Services.AddTransient<IAppointmentsRepo, AppointmentsRepo>();
+            builder.Services.AddSingleton<IMsgBox, MsgBox>();
             await builder.Build().RunAsync();
         }
     }

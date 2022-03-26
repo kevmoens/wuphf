@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Wuphf.Shared.Dialog;
 
 namespace Wuphf.Client.Models.Dialog
 {
-    public static class MsgBox
+    public class MsgBox : IMsgBox
     {
         private static SemaphoreSlim messageLock;
         private static TaskCompletionSource<string> completionSource;
-        static MsgBox()
+        public MsgBox()
         {
             messageLock = new SemaphoreSlim(1, 1);
         }
-        public static async Task<string> Show(string message, string title, DialogButtons buttons)
+        public async Task<string> Show(string message, string title, DialogButtons buttons)
         {
             await messageLock.WaitAsync();
             completionSource = new TaskCompletionSource<string>();

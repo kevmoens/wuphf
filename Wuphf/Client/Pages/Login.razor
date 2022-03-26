@@ -3,9 +3,11 @@
 @using Wuphf.Shared.Session
 @using Wuphf.Client.Models.Session
 @using Wuphf.Client.Models.Dialog
+@using Wuphf.Shared.Dialog
 @inject NavigationManager navigationManager
 @inject HttpClient Http
 @inject Session session
+@inject IMsgBox MsgBox 
 
 <div class="container">
     <div class="centered-username">

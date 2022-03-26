@@ -1,5 +1,7 @@
 ﻿@page "/connections"
+@using Wuphf.Shared.Dialog;
 @using Wuphf.Client.Models.Dialog
+@inject IMsgBox MsgBox  
 <h3>Connections</h3>
 
         This is my computer quiz?
@@ -17,10 +19,10 @@
     {
         if (guess.ToUpper() == "BINARY")
         {
-            await MsgBox.Show("You are Correct", "Question", Models.Dialog.DialogButtons.OK);
+            await MsgBox.Show("You are Correct", "Question", DialogButtons.OK);
             return;
         }
-        await MsgBox.Show("Sorry, try again.", "Question", Models.Dialog.DialogButtons.OK);
+        await MsgBox.Show("Sorry, try again.", "Question", DialogButtons.OK);
     }
 
 }

@@ -33,15 +33,14 @@
     <None Remove="System.Net.Http" />
     <None Remove="Newtonsoft.Json" />
     <None Remove="Neleus.DependencyInjection.Extensions" />
-    <None Remove="Models\" />
     <None Remove="appsettings.json" />
     <None Remove="App\" />
-    <None Remove="Models\Login\" />
     <None Remove="Models\AppointmentDetails\" />
     <None Remove="System.Net.Http.Json" />
     <None Remove="System.Memory" />
     <None Remove="System.Buffers" />
     <None Remove="Behaviors\" />
+    <None Remove="Dialog\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shared\Wuphf.Shared.csproj" />
@@ -50,11 +49,9 @@
   <ItemGroup>
     <Folder Include="Views\" />
     <Folder Include="ViewModels\" />
-    <Folder Include="Models\" />
     <Folder Include="App\" />
-    <Folder Include="Models\Login\" />
-    <Folder Include="Models\Appointments\" />
     <Folder Include="Behaviors\" />
+    <Folder Include="Dialog\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="appsettings.json" />

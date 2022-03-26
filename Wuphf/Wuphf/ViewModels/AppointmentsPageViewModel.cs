@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Microsoft.Extensions.Logging;
 using Wuphf.MVVM;
-using Wuphf.Repository.Appointments;
 using Wuphf.Shared.Appointments;
 
 namespace Wuphf.ViewModels
