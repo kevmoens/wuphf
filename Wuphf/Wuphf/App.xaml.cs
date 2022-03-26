@@ -50,7 +50,7 @@ namespace Wuphf
                 .AddScoped(sp => new HttpClient())
                 .AddTransient<IAppointmentsRepo, AppointmentsRepo>()
                 .AddTransient<Views.AppointmentsPage>()
-                .AddTransient<Views.AppointmentsPage>()
+                .AddTransient<Views.AppointmentDetailsPage>()
                 .AddTransient<Views.MainPage>()
                 .AddTransient<Views.HomePage>()
                 .AddTransient<ViewModels.AppointmentDetailsPageViewModel>()
