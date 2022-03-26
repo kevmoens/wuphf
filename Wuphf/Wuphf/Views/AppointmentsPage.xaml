@@ -2,58 +2,27 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:views="clr-namespace:Wuphf.Views"
-    xmlns:local="clr-namespace:Wuphf.ViewModels"
     xmlns:behaviors="clr-namespace:Behaviors;assembly=Behaviors"
-    x:Class="Wuphf.Views.AppointmentsPage"
-    x:Name="currentPage"
-    >
+    xmlns:wbehaviors="clr-namespace:Wuphf.Behaviors"
+    x:Class="Wuphf.Views.AppointmentsPage">
     <ContentPage.Behaviors>
         <behaviors:EventHandlerBehavior EventName="Appearing">
             <behaviors:InvokeCommandAction Command="{Binding AppearingCommand}" />
         </behaviors:EventHandlerBehavior>
     </ContentPage.Behaviors>
     <ContentPage.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label Text="Appointments"/>
-            <Button Grid.Column="1" Text="Edit" Command="{Binding EditAppointmentsCommand}"/>
-            <ListView
-                Grid.Row="1"
-                Grid.ColumnSpan="3"
-                ItemsSource="{Binding AppointmentDetails}"
-                >
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <Label Text="{Binding Appointment.Description}"/>
-                                <Label Grid.Column="1" Text="{Binding SchedDateTime}"/>
-                                <Switch Grid.Column="2" >
-                                    <Switch.Behaviors>
-                                        <behaviors:EventHandlerBehavior EventName="Toggled">
-                                            <behaviors:InvokeCommandAction Command="{Binding Source={x:Reference currentPage}, Path=BindingContext.CompleteCommand}" CommandParameter="{Binding .}" />
-                                        </behaviors:EventHandlerBehavior>
-                                    </Switch.Behaviors>
-                                </Switch>
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </Grid>
+        <ListView x:Name="ApptList"
+            ItemsSource="{Binding AppointmentsRepo.Appointments}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell
+                        wbehaviors:TappedCommandViewCell.TappedCommand="{Binding BindingContext.EditCommand, Source={x:Reference Name=ApptList}}"
+                        wbehaviors:TappedCommandViewCell.TappedCommandParameter="{Binding }"
+                        >
+                        <Label Text="{Binding Description}"/>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </ContentPage.Content>
 </ContentPage>

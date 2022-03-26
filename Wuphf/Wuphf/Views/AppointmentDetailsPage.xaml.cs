@@ -5,9 +5,9 @@ using Xamarin.Forms;
 
 namespace Wuphf.Views
 {
-    public partial class CreateAppointmentsPage : ContentPage
+    public partial class AppointmentDetailsPage : ContentPage
     {
-        public CreateAppointmentsPage()
+        public AppointmentDetailsPage()
         {
             InitializeComponent();
             this.BindingContext = ViewModelLocator.Resolve(this.GetType());

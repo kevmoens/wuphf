@@ -18,6 +18,8 @@ namespace Wuphf.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
         RegionService regionService;
+        public ICommand AppearingCommand { get; set; }
+        public ICommand EditCommand { get; set; }
         ILogger<AppointmentsPageViewModel> logger;
 
         private IServiceProvider serviceProvider;
@@ -26,46 +28,33 @@ namespace Wuphf.ViewModels
             get { return serviceProvider; }
             set { serviceProvider = value; OnPropertyChanged(); }
         }
-
-        private ObservableCollection<AppointmentDetail> appointmentDetails = new ObservableCollection<AppointmentDetail>();
-        public ObservableCollection<AppointmentDetail> AppointmentDetails
+        private IAppointmentsRepo appointmentsRepo;
+        public IAppointmentsRepo AppointmentsRepo
         {
-            get { return appointmentDetails; }
-            set { appointmentDetails = value; OnPropertyChanged(); }
+            get { return appointmentsRepo; }
+            set { appointmentsRepo = value; OnPropertyChanged(); }
         }
-        public ICommand AppearingCommand { get; set; }
-        public ICommand CompleteCommand { get; set; }
-        public ICommand EditAppointmentsCommand { get; set; }
         public AppointmentsPageViewModel(IServiceProvider serviceProvider
             , RegionService regionService
             , ILogger<AppointmentsPageViewModel> logger
+            , IAppointmentsRepo appointmentsRepo
             )
         {
             this.ServiceProvider = serviceProvider;
             this.regionService = regionService;
             this.logger = logger;
+            AppointmentsRepo = appointmentsRepo;
             AppearingCommand = new DelegateCommand(OnAppearing);
-            CompleteCommand = new DelegateCommand<AppointmentDetail>(OnComplete);
-            EditAppointmentsCommand = new DelegateCommand(OnEdit);
-        }
-        public async void OnComplete(AppointmentDetail detail)
-        {
-            var repo = new AppointmentDetails();
-            await repo.Complete(detail);
-            AppointmentDetails.Remove(detail);
+            EditCommand = new DelegateCommand(OnEdit);
         }
         public async void OnAppearing()
         {
-            var repo = new AppointmentDetails();
-            AppointmentDetails.Clear();
-            foreach (var dtl in await repo.List())
-            {
-                AppointmentDetails.Add(dtl);
-            }
+            await AppointmentsRepo.GetAppointments();
+            
         }
         public async void OnEdit()
         {
-            await regionService.Navigate("MainRegion", "CreateAppointments");
+            await App.Current.MainPage.DisplayAlert("YourApp", "EDIT", "Ok");
 
         }
     }
