@@ -32,7 +32,7 @@ namespace Wuphf.ViewModels
         }
         public async void OnAppearing()
         {
-            await regionService?.Navigate("MainRegion", "Home");
+            await regionService?.Navigate("MainRegion", "Login");
         }
     }
 }

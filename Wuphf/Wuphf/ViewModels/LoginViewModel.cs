@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace Wuphf.ViewModels
 {
-    public class HomePageViewModel : INotifyPropertyChanged
+    public class LoginViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string name = "")
@@ -18,7 +18,7 @@ namespace Wuphf.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
         RegionService regionService;
-        ILogger<HomePageViewModel> logger;
+        ILogger<LoginViewModel> logger;
 
         private IServiceProvider serviceProvider;
         public IServiceProvider ServiceProvider
@@ -39,9 +39,9 @@ namespace Wuphf.ViewModels
             set { password = value; OnPropertyChanged(); }
         }
         public ICommand LoginCommand { get; set; }
-        public HomePageViewModel(IServiceProvider serviceProvider
+        public LoginViewModel(IServiceProvider serviceProvider
             , RegionService regionService
-            , ILogger<HomePageViewModel> logger
+            , ILogger<LoginViewModel> logger
             )
         {
             this.ServiceProvider = serviceProvider;

@@ -25,7 +25,7 @@ namespace Wuphf
             ViewModelLocator.ServiceProvider = ServiceProvider;
             var appSettings = ServiceProviderServiceExtensions.GetService<IAppSettings>(ServiceProvider);
             appSettings.WuphfURL = Wuphf.Application.AppSettingsManager.Settings["WuphfUrl"].TrimEnd('/');
-            MainPage = new NavigationPage(new Views.HomePage());
+            MainPage = new NavigationPage(new Views.Login());
             RegionManager.SetRegionName(MainPage, "MainRegion");
             RegionManager.SetServiceProvider(MainPage, ServiceProvider);
         }
@@ -55,16 +55,16 @@ namespace Wuphf
                 .AddTransient<Views.AppointmentsPage>()
                 .AddTransient<Views.AppointmentDetailsPage>()
                 .AddTransient<Views.MainPage>()
-                .AddTransient<Views.HomePage>()
+                .AddTransient<Views.Login>()
                 .AddTransient<ViewModels.AppointmentDetailsPageViewModel>()
                 .AddTransient<ViewModels.AppointmentsPageViewModel>()
-                .AddTransient<ViewModels.HomePageViewModel>()
+                .AddTransient<ViewModels.LoginViewModel>()
                 .AddTransient<ViewModels.MainPageViewModel>()
             ;
             services.AddByName<Page>()
                 .Add<Views.MainPage>("Main")
                 .Add<Views.AppointmentDetailsPage>("AppointmentDetails")
-                .Add<Views.HomePage>("Home")
+                .Add<Views.Login>("Login")
                 .Add<Views.AppointmentsPage>("Appointments")
                 //.Add<Views.Connections>("Connections")
                 //.Add<Views.ConnectionNew>("ConnectionNew")

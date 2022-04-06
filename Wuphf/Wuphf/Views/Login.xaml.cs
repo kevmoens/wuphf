@@ -5,9 +5,9 @@ using Xamarin.Forms;
 
 namespace Wuphf.Views
 {
-    public partial class HomePage : ContentPage
+    public partial class Login : ContentPage
     {
-        public HomePage()
+        public Login()
         {
             InitializeComponent();
             this.BindingContext = ViewModelLocator.Resolve(this.GetType());
