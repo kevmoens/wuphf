@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wuphf.MVVM", "Wuphf.MVVM\Wu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wuphf.Shared", "Wuphf\Shared\Wuphf.Shared.csproj", "{F572F5AE-4E2C-4F5E-86AB-FD9F5EECE5AD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWuphf", "TestWuphf\TestWuphf.csproj", "{2A768BDA-5D58-425C-B3EB-BB1175D95CAF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +127,18 @@ Global
 		{F572F5AE-4E2C-4F5E-86AB-FD9F5EECE5AD}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{F572F5AE-4E2C-4F5E-86AB-FD9F5EECE5AD}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{F572F5AE-4E2C-4F5E-86AB-FD9F5EECE5AD}.Release|iPhone.Build.0 = Release|Any CPU
+		{2A768BDA-5D58-425C-B3EB-BB1175D95CAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A768BDA-5D58-425C-B3EB-BB1175D95CAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A768BDA-5D58-425C-B3EB-BB1175D95CAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A768BDA-5D58-425C-B3EB-BB1175D95CAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A768BDA-5D58-425C-B3EB-BB1175D95CAF}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{2A768BDA-5D58-425C-B3EB-BB1175D95CAF}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{2A768BDA-5D58-425C-B3EB-BB1175D95CAF}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{2A768BDA-5D58-425C-B3EB-BB1175D95CAF}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{2A768BDA-5D58-425C-B3EB-BB1175D95CAF}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{2A768BDA-5D58-425C-B3EB-BB1175D95CAF}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{2A768BDA-5D58-425C-B3EB-BB1175D95CAF}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{2A768BDA-5D58-425C-B3EB-BB1175D95CAF}.Release|iPhone.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
