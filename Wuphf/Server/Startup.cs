@@ -33,7 +33,7 @@ namespace Wuphf.Server
                                                  .AllowAnyMethod();
                                       });
             });
-            services.AddDbContext<Repository.WuphfRepository>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<Repository.IWuphfRepository, Repository.WuphfRepository>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllersWithViews();
             services.AddRazorPages();
         }

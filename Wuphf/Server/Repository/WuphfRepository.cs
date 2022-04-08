@@ -9,7 +9,7 @@ namespace Wuphf.Server.Repository
 {
 
 
-    public class WuphfRepository : DbContext
+    public class WuphfRepository : DbContext, IWuphfRepository
     {
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Session> Sessions { get; set; }
