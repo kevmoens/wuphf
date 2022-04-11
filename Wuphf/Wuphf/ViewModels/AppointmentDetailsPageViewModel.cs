@@ -5,8 +5,9 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Microsoft.Extensions.Logging;
 using Wuphf.MVVM;
-using Wuphf.Repository.Appointments;
+using Wuphf.Shared.Repository.Appointments;
 using Wuphf.Shared.Appointments;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Wuphf.ViewModels
 {
@@ -50,13 +51,13 @@ namespace Wuphf.ViewModels
         }
         public async void OnComplete(AppointmentDetail detail)
         {
-            var repo = new AppointmentDetails();
+            var repo = ServiceProvider.GetService<AppointmentDetails>();
             await repo.Complete(detail);
             AppointmentDetails.Remove(detail);
         }
         public async void OnAppearing()
         {
-            var repo = new AppointmentDetails();
+            var repo = ServiceProvider.GetService<AppointmentDetails>();
             AppointmentDetails.Clear();
             foreach (var dtl in await repo.List())
             {

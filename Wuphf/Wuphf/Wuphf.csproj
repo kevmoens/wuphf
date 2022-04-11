@@ -49,7 +49,6 @@
   <ItemGroup>
     <Folder Include="Views\" />
     <Folder Include="ViewModels\" />
-    <Folder Include="App\" />
     <Folder Include="Behaviors\" />
     <Folder Include="Dialog\" />
   </ItemGroup>

@@ -3,10 +3,13 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Microsoft.Extensions.Logging;
-using Wuphf.Repository.Login;
 using Wuphf.MVVM;
 using Wuphf.Shared;
 using Xamarin.Forms;
+using System.Threading.Tasks;
+using Wuphf.Shared.Dialog;
+using Wuphf.Shared.Repository.Login;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Wuphf.ViewModels
 {
@@ -19,6 +22,7 @@ namespace Wuphf.ViewModels
         }
         RegionService regionService;
         ILogger<LoginViewModel> logger;
+        IMsgBox msgBox;
 
         private IServiceProvider serviceProvider;
         public IServiceProvider ServiceProvider
@@ -42,23 +46,25 @@ namespace Wuphf.ViewModels
         public LoginViewModel(IServiceProvider serviceProvider
             , RegionService regionService
             , ILogger<LoginViewModel> logger
+            , IMsgBox msgBox
             )
         {
             this.ServiceProvider = serviceProvider;
             this.regionService = regionService;
             this.logger = logger;
-            LoginCommand = new DelegateCommand(OnLogin);
+            this.msgBox = msgBox;
+            LoginCommand = new DelegateCommand(async () => { await OnLogin(); });
         }
-        public async void OnLogin()
+        public async Task OnLogin()
         {
             Guid token = Guid.Empty;
-            Login login = new Login();
+            Login login = ServiceProvider.GetService<Login>();
             try
             {
                 await login.Process(new LoginRequest() { UserName = UserName, Password = Password });
             } catch (Exception ex)
             {
-                await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+                await msgBox.Show(ex.Message, "Error", DialogButtons.OK);
                 return;
             }
             var navigation = regionService.NavigationServices["MainRegion"];

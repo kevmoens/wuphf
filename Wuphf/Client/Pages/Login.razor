@@ -8,14 +8,15 @@
 @inject HttpClient Http
 @inject Session session
 @inject IMsgBox MsgBox 
+@inject Wuphf.Shared.Repository.Login.Login ViewModel
 
 <div class="container">
     <div class="centered-username">
 
-        <input placeholder="username" type="text" @bind-value="username" @onkeyup="Enter">
+        <input placeholder="username" type="text" @bind-value="UserName" @onkeyup="Enter">
     </div>
     <div class="centered-password">
-        <input placeholder="password" type="password" @bind-value="password" @onkeyup="Enter" >
+        <input placeholder="password" type="password" @bind-value="Password" @onkeyup="Enter" >
     </div>
     <div class="centered-create">
         <button type="button" class="btn btn-outline-primary btn-border centered-create" @onclick="OnLogin">Login</button>
@@ -30,18 +31,28 @@
 
 
 @code {
-    private string username;
+    private string userName;
+    public string UserName
+    {
+        get { return userName; }
+        set { userName = value; }
+    }
     private string password;
+    public string Password
+    {
+        get { return password; }
+        set { password = value; }
+    }
     public async Task OnLogin()
     {
-        if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+        if (string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(Password))
         {
             await MsgBox.Show("Username and Password are required.", "Wuphf Error", DialogButtons.OK);
             return;
         }
 
-        var login = new LoginRequest() { UserName = username, Password = password };
-        var result = await Http.PostAsJsonAsync<LoginRequest>($"Account/{username}", login);
+        var login = new LoginRequest() { UserName = UserName, Password = Password };
+        var result = await Http.PostAsJsonAsync<LoginRequest>($"Account/{UserName}", login);
         if (!result.IsSuccessStatusCode)
         {
             System.Diagnostics.Debug.Print(result.ReasonPhrase);
@@ -54,7 +65,7 @@
             await MsgBox.Show(content, "Wuphf Error", DialogButtons.OK);
             return;
         }
-        session.UserName = username;
+        session.UserName = UserName;
         session.Token = content;
         PubSub.Hub.Default.Publish<SessionStatusChangedEvent>(new SessionStatusChangedEvent() { Token = content });
         navigationManager.NavigateTo("Home");

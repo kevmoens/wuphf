@@ -4,14 +4,21 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Wuphf.Shared.Appointments;
-namespace Wuphf.Repository.Appointments
+using Wuphf.Shared.Configuration;
+
+namespace Wuphf.Shared.Repository.Appointments
 {
     public class AppointmentDetails
     {
+        IAppSettings appSettings;
+        public AppointmentDetails(IAppSettings appSettings)
+        {
+            this.appSettings = appSettings;
+        }
         public async Task<List<AppointmentDetail>> List()
         {
             HttpClient client = new HttpClient();
-            string url = Wuphf.Application.AppSettingsManager.Settings["WuphfUrl"];
+            string url = appSettings.WuphfURL;
             url = $"{url}AppointmentDetail/{DateTime.Now.ToString("s")}";
             var result = await client.GetAsync(url);
             if (!result.IsSuccessStatusCode)
@@ -31,7 +38,7 @@ namespace Wuphf.Repository.Appointments
         {
             HttpClient client = new HttpClient();
             var detailJson = Newtonsoft.Json.JsonConvert.SerializeObject(detail);
-            string url = Wuphf.Application.AppSettingsManager.Settings["WuphfUrl"];
+            string url = appSettings.WuphfURL;
             var result = await client.PostAsync($"{url}AppointmentDetail", new StringContent(detailJson, Encoding.UTF8, "application/json"));
             if (!result.IsSuccessStatusCode)
             {

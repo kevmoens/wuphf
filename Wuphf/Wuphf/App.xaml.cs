@@ -10,6 +10,8 @@ using System.Net.Http;
 using Wuphf.Shared.Configuration;
 using Wuphf.Shared.Dialog;
 using Wuphf.Dialog;
+using Wuphf.Shared.Repository.Appointments;
+using Wuphf.Shared.Repository.Login;
 
 namespace Wuphf
 {
@@ -50,6 +52,8 @@ namespace Wuphf
                 .AddSingleton<RegionService>()
                 .AddSingleton<IAppSettings, AppSettings>()
                 .AddScoped(sp => new HttpClient())
+                .AddTransient<Login>()
+                .AddTransient<AppointmentDetails>()
                 .AddTransient<IAppointmentsRepo, AppointmentsRepo>()
                 .AddSingleton<IMsgBox, MsgBox>()
                 .AddTransient<Views.AppointmentsPage>()

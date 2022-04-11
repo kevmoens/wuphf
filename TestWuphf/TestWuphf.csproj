@@ -23,7 +23,6 @@
     <ProjectReference Include="..\Wuphf\Wuphf\Wuphf.csproj" />
     <ProjectReference Include="..\Wuphf\Client\Wuphf.Client.csproj" />
     <ProjectReference Include="..\Wuphf.MVVM\Wuphf.MVVM.csproj" />
-    <ProjectReference Include="..\Wuphf.Console\Wuphf.Console.csproj" />
     <ProjectReference Include="..\Wuphf\Server\Wuphf.Server.csproj" />
     <ProjectReference Include="..\Wuphf\Shared\Wuphf.Shared.csproj" />
   </ItemGroup>
