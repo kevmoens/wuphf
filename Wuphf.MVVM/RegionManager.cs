@@ -49,7 +49,7 @@ namespace Wuphf.MVVM
             var regionName = GetRegionName(obj);
             if (string.IsNullOrEmpty(regionName)) return;
             if (serviceProvider == null) return;
-            var regionService = serviceProvider.GetService<RegionService>();
+            var regionService = serviceProvider.GetService<IRegionService>();
             if (regionService != null && !regionService.NavigationServices.ContainsKey(regionName))
             {
                 regionService.NavigationServices.Add(regionName, new XFNavigationService((NavigationPage)obj));

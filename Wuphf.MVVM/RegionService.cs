@@ -14,7 +14,7 @@ namespace Wuphf.MVVM
     ///
     /// MVP is Navigation Parameters
     /// </summary>
-    public class RegionService
+    public class RegionService : IRegionService
     {
         IServiceProvider serviceProvider;
         ILogger<RegionService> logger;

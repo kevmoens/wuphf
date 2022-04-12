@@ -49,7 +49,7 @@ namespace Wuphf
         {
             IServiceCollection services = new ServiceCollection();
             services
-                .AddSingleton<RegionService>()
+                .AddSingleton<IRegionService, RegionService>()
                 .AddSingleton<IAppSettings, AppSettings>()
                 .AddScoped(sp => new HttpClient())
                 .AddTransient<Login>()

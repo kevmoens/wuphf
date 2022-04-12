@@ -10,7 +10,7 @@ namespace Wuphf.ViewModels
 {
     public class MainPageViewModel 
     {
-        RegionService regionService;
+        IRegionService regionService;
         ILogger<MainPageViewModel> logger;
 
         private IServiceProvider serviceProvider;
@@ -21,7 +21,7 @@ namespace Wuphf.ViewModels
         }
         public ICommand AppearingCommand { get; set; }
         public MainPageViewModel(IServiceProvider serviceProvider
-            , RegionService regionService
+            , IRegionService regionService
             , ILogger<MainPageViewModel> logger
             )
         {

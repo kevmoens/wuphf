@@ -20,7 +20,7 @@ namespace Wuphf.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
-        RegionService regionService;
+        IRegionService regionService;
         ILogger<LoginViewModel> logger;
         IMsgBox msgBox;
 
@@ -44,7 +44,7 @@ namespace Wuphf.ViewModels
         }
         public ICommand LoginCommand { get; set; }
         public LoginViewModel(IServiceProvider serviceProvider
-            , RegionService regionService
+            , IRegionService regionService
             , ILogger<LoginViewModel> logger
             , IMsgBox msgBox
             )

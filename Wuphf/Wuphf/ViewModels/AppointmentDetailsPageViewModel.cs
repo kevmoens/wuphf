@@ -18,7 +18,7 @@ namespace Wuphf.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
-        RegionService regionService;
+        IRegionService regionService;
         ILogger<AppointmentDetailsPageViewModel> logger;
 
         private IServiceProvider serviceProvider;
@@ -38,7 +38,7 @@ namespace Wuphf.ViewModels
         public ICommand CompleteCommand { get; set; }
         public ICommand EditAppointmentsCommand { get; set; }
         public AppointmentDetailsPageViewModel(IServiceProvider serviceProvider
-            , RegionService regionService
+            , IRegionService regionService
             , ILogger<AppointmentDetailsPageViewModel> logger
             )
         {
