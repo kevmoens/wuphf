@@ -14,11 +14,11 @@ namespace Wuphf.MVVM
     ///
     /// MVP is Navigation Parameters
     /// </summary>
-    public class RegionService
+    public class RegionService : IRegionService
     {
         IServiceProvider serviceProvider;
-        ILogger<RegionService> logger;
-        public RegionService(IServiceProvider serviceProvider, ILogger<RegionService> logger)
+        ILogger<IRegionService> logger;
+        public RegionService(IServiceProvider serviceProvider, ILogger<IRegionService> logger)
         {
             this.serviceProvider = serviceProvider;
             this.logger = logger;
@@ -28,6 +28,10 @@ namespace Wuphf.MVVM
         {
             //Need Neuleus so I can register a class that wraps the view so I can pull it back up.
             //Have to make a extension method for Registering the new.
+
+
+            var navigation = NavigationServices[RegionName];
+            Page page = navigation.NavigationStack[navigation.NavigationStack.Count - 1];
 
             Page view;
             try
@@ -56,6 +60,8 @@ namespace Wuphf.MVVM
             {
                 ((INavigationParametersAware)view.BindingContext).NavigatedTo(parameters);
             }
+
+            navigation.RemovePage(page);
         }
     }
 }

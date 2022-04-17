@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Wuphf.MVVM;
 using Wuphf.Shared.Session;
 using Wuphf.Shared.Appointments;
 using Wuphf.Shared.Configuration;
@@ -16,6 +17,7 @@ using Wuphf.Client.Models.Dialog;
 using Wuphf.Shared.Repository;
 using Wuphf.Shared.Repository.Login;
 using Wuphf.Shared.Repository.Appointments;
+using Wuphf.Client.MVVM;
 
 namespace Wuphf.Client
 {
@@ -32,6 +34,10 @@ namespace Wuphf.Client
             builder.Services.AddMudServices();
             builder.Services.AddSingleton<Session>();
             builder.Services.AddTransient<IAppointmentsRepo, AppointmentsRepo>();
+            builder.Services.AddSingleton<IRegionService, BlazorRegionService>();
+            NavigateToRoute navigateToRoute = new NavigateToRoute();
+            navigateToRoute.Routes.Add("AppointmentDetails", "appointments");
+            builder.Services.AddSingleton<NavigateToRoute>(navigateToRoute);
             builder.Services.AddSingleton<IMsgBox, MsgBox>();
             await builder.Build().RunAsync();
         }

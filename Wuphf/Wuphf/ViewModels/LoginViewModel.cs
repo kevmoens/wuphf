@@ -20,7 +20,7 @@ namespace Wuphf.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
-        RegionService regionService;
+        IRegionService regionService;
         ILogger<LoginViewModel> logger;
         IMsgBox msgBox;
 
@@ -44,7 +44,7 @@ namespace Wuphf.ViewModels
         }
         public ICommand LoginCommand { get; set; }
         public LoginViewModel(IServiceProvider serviceProvider
-            , RegionService regionService
+            , IRegionService regionService
             , ILogger<LoginViewModel> logger
             , IMsgBox msgBox
             )
@@ -67,10 +67,8 @@ namespace Wuphf.ViewModels
                 await msgBox.Show(ex.Message, "Error", DialogButtons.OK);
                 return;
             }
-            var navigation = regionService.NavigationServices["MainRegion"];
-            Page page = navigation.NavigationStack[navigation.NavigationStack.Count - 1];
             await regionService?.Navigate("MainRegion", "AppointmentDetails");
-            navigation.RemovePage(page);
+
         }
     }
 }
