@@ -67,10 +67,8 @@ namespace Wuphf.ViewModels
                 await msgBox.Show(ex.Message, "Error", DialogButtons.OK);
                 return;
             }
-            var navigation = regionService.NavigationServices["MainRegion"];
-            Page page = navigation.NavigationStack[navigation.NavigationStack.Count - 1];
             await regionService?.Navigate("MainRegion", "AppointmentDetails");
-            navigation.RemovePage(page);
+
         }
     }
 }
