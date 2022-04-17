@@ -5,6 +5,6 @@ namespace Wuphf.Client.MVVM
 {
     public class NavigationParameters 
     {
-        Dictionary<string,Dictionary<string, object>> Parameters { get; set; } = new Dictionary<string, Dictionary<string, object>>();
+        public Dictionary<string,Dictionary<string, object>> Parameters { get; set; } = new Dictionary<string, Dictionary<string, object>>();
     }
 }

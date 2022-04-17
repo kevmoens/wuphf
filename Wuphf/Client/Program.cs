@@ -16,6 +16,8 @@ using Wuphf.Client.Models.Dialog;
 using Wuphf.Shared.Repository;
 using Wuphf.Shared.Repository.Login;
 using Wuphf.Shared.Repository.Appointments;
+using Wuphf.Client.MVVM;
+using Wuphf.MVVM;
 
 namespace Wuphf.Client
 {
@@ -32,6 +34,8 @@ namespace Wuphf.Client
             builder.Services.AddMudServices();
             builder.Services.AddSingleton<Session>();
             builder.Services.AddTransient<IAppointmentsRepo, AppointmentsRepo>();
+            builder.Services.AddSingleton<IRegionService, RegionService>();
+            builder.Services.AddSingleton<NavigationParameters>();
             builder.Services.AddSingleton<IMsgBox, MsgBox>();
             await builder.Build().RunAsync();
         }
