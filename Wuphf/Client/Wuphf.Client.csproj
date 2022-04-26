@@ -20,9 +20,13 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Wuphf.MVVM\Wuphf.MVVM.csproj" />
     <ProjectReference Include="..\Shared\Wuphf.Shared.csproj" />
+<<<<<<< Updated upstream
     <ProjectReference Include="..\..\Wuphf.MVVM\Wuphf.MVVM.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+=======
+    <ProjectReference Include="..\..\Wuphf.MVVM\Wuphf.MVVM.csproj" />
+>>>>>>> Stashed changes
   </ItemGroup>
 
   <ItemGroup>
