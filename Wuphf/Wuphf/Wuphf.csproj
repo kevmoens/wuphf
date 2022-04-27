@@ -41,6 +41,7 @@
     <None Remove="System.Buffers" />
     <None Remove="Behaviors\" />
     <None Remove="Dialog\" />
+    <None Remove="MVVM\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shared\Wuphf.Shared.csproj" />
@@ -51,6 +52,7 @@
     <Folder Include="ViewModels\" />
     <Folder Include="Behaviors\" />
     <Folder Include="Dialog\" />
+    <Folder Include="MVVM\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="appsettings.json" />

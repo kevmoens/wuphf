@@ -1,5 +1,5 @@
 ﻿using System;
-using Xamarin.Forms;
+//using Xamarin.Forms;
 
 namespace Wuphf.MVVM
 {
@@ -7,7 +7,7 @@ namespace Wuphf.MVVM
     {
         void GoBack();
         void GoForward();
-        bool Navigate(NavigableElement view);
+        //bool Navigate(NavigableElement view);
         bool Navigate(string uri);
         bool Navigate(Uri uri);
         void Refresh();

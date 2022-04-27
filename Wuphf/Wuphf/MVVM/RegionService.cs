@@ -23,14 +23,14 @@ namespace Wuphf.MVVM
             this.serviceProvider = serviceProvider;
             this.logger = logger;
         }
-        public Dictionary<string, INavigation> NavigationServices { get; set; } = new Dictionary<string, INavigation>(System.StringComparer.InvariantCultureIgnoreCase);
+        public Dictionary<string, object> NavigationServices { get; set; } = new Dictionary<string, object>(System.StringComparer.InvariantCultureIgnoreCase);
         public async Task Navigate(string RegionName, string ViewName, Dictionary<string, object> parameters = null)
         {
             //Need Neuleus so I can register a class that wraps the view so I can pull it back up.
             //Have to make a extension method for Registering the new.
 
 
-            var navigation = NavigationServices[RegionName];
+            var navigation = (INavigation)NavigationServices[RegionName];
             Page page = navigation.NavigationStack[navigation.NavigationStack.Count - 1];
 
             Page view;
@@ -49,7 +49,7 @@ namespace Wuphf.MVVM
             }
 
 
-            await NavigationServices[RegionName].PushAsync(view);
+            await ((INavigation)NavigationServices[RegionName]).PushAsync(view);
             if (parameters == null)
             {
                 parameters = new Dictionary<string, object>();

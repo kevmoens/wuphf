@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Wuphf.MVVM;
-using Xamarin.Forms;
 
 namespace Wuphf.Client.MVVM
 {
@@ -17,7 +16,7 @@ namespace Wuphf.Client.MVVM
             this.navigationParameters = navigationParameters;
         }
 
-        public Dictionary<string, INavigation> NavigationServices { get; set; }
+        public Dictionary<string, object> NavigationServices { get; set; }
 
         public Task Navigate(string RegionName, string ViewName, Dictionary<string, object> parameters = null)
         {
