@@ -19,7 +19,7 @@ namespace Wuphf.Shared.Repository.Login
             HttpClient client = new HttpClient();
             var loginJson = Newtonsoft.Json.JsonConvert.SerializeObject(login);
             string url = appSettings.WuphfURL;
-            var result = await client.PostAsync($"{url}Account/{login.UserName}", new StringContent(loginJson, Encoding.UTF8, "application/json"));
+            var result = await client.PostAsync($"{url}/Account/{login.UserName}", new StringContent(loginJson, Encoding.UTF8, "application/json"));
             if (!result.IsSuccessStatusCode)
             {
                 throw new HttpRequestException(result.ReasonPhrase);

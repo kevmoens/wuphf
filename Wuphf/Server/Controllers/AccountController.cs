@@ -15,8 +15,8 @@ namespace Wuphf.Server.Controllers
     [Route("[controller]")]
     public class AccountController : Controller
     {
-        WuphfRepository repository;
-        public AccountController(WuphfRepository repository)
+        IWuphfRepository repository;
+        public AccountController(IWuphfRepository repository)
         {
             this.repository = repository;
 
