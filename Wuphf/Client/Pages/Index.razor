@@ -40,7 +40,7 @@
         base.OnInitialized();
         if (!string.IsNullOrEmpty(session?.Token))
         {
-            navigationManager.NavigateTo("home");
+            navigationManager.NavigateTo("AppointmentDetails");
         }
     }
     public void OnCreateAccount()
@@ -56,7 +56,7 @@
         IsLoggedIn = !string.IsNullOrEmpty(sessionStatus.Token);
         if (IsLoggedIn)
         {
-            navigationManager.NavigateTo("home");
+            navigationManager.NavigateTo("AppointmentDetails");
         }
     }
 }

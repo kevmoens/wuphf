@@ -67,7 +67,7 @@
         session.UserName = UserName;
         session.Token = content;
         PubSub.Hub.Default.Publish<SessionStatusChangedEvent>(new SessionStatusChangedEvent() { Token = content });
-        navigationManager.NavigateTo("Home");
+        navigationManager.NavigateTo("AppointmentDetails");
     }
     public async void Enter(KeyboardEventArgs e)
     {
