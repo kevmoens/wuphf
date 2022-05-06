@@ -16,8 +16,8 @@ namespace Wuphf.Server.Controllers
     [Route("[controller]")]
     public class AppointmentController : Controller
     {
-        WuphfRepository repository;
-        public AppointmentController(WuphfRepository repository)
+        IWuphfRepository repository;
+        public AppointmentController(IWuphfRepository repository)
         {
             this.repository = repository;
 
