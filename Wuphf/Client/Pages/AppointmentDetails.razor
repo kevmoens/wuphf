@@ -4,23 +4,38 @@
 
 @if (details != null)
 {
-<div class="container">
-    <div><h2>Task</h2></div>
-    <div><h2>Time</h2></div>
-    <div><h2>Complete</h2></div>
-    <div><h2>Delay</h2></div>
-    @foreach (var dtl in details)
-    {
-        <div><h2>@dtl.Appointment?.Description</h2></div>
-        <div> <h2>@dtl.SchedDateTime.ToShortDateString() @dtl.SchedDateTime.ToShortTimeString() </h2></div>
-        <div> <MudFab Color="Color.Primary" StartIcon="@Icons.Filled.Done" @onclick="() => {OnDetailsCompleted(dtl); }" /> </div>
-        <div> <MudFab Color="Color.Primary" StartIcon="@Icons.Filled.WatchLater" @onclick="() => {OnDetailsDelay(dtl); }" /> </div>
+    <div class="container">
+        <div><h2>Task</h2></div>
+        <div><h2>Time</h2></div>
+        <div><h2>Complete</h2></div>
+        <div><h2>Delay</h2></div>
+        @foreach (var dtl in details)
+        {
+            <div><h2>@dtl.Appointment?.Description</h2></div>
+            <div> <h2>@dtl.SchedDateTime.ToShortDateString() @dtl.SchedDateTime.ToShortTimeString() </h2></div>
+            <div> <MudFab Color="Color.Primary" StartIcon="@Icons.Filled.Done" @onclick="() => {OnDetailsCompleted(dtl); }" /> </div>
+            <div> <MudFab Color="Color.Primary" StartIcon="@Icons.Filled.WatchLater" @onclick="() => {OnDetailsDelay(dtl); }" /> </div>
 
-    }
-</div>
+        }
+    </div>
+    <Modal @ref="modal">
+        <Title>Delay</Title>
+        <Body>
+            TODO CODE HOW LONG TO DELAY
+        </Body>
+        <Footer>
+
+            <button type="button" class="btn btn-primary" data-dismiss="modal" @onclick="OnDelayOK">OK</button>
+            <button type="button" class="btn" data-dismiss="modal" @onclick="OnDelayCancel">Cancel</button>
+
+        </Footer>
+    </Modal>
 
 }
 @code {
+
+    private Modal modal { get; set; }
+    private AppointmentDetail DelayDetail { get; set; }
     private List<AppointmentDetail> details;
     protected async override Task OnInitializedAsync()
     {
@@ -35,11 +50,23 @@
         await Http.PostAsJsonAsync<AppointmentDetail>("AppointmentDetail", dtl);
         StateHasChanged();
     }
-    public async void OnDetailsDelay(AppointmentDetail dtl)
+    public void OnDetailsDelay(AppointmentDetail dtl)
     {
-        await Http.PostAsJsonAsync<AppointmentDetail>("AppointmentDetail/Delay", dtl);
+        DelayDetail = dtl;
+        modal.Open();
+        StateHasChanged();
+
+    }
+    public async void OnDelayOK()
+    {
+        await Http.PostAsJsonAsync<AppointmentDetail>("AppointmentDetail/Delay", DelayDetail);
         var dtls = await Http.GetFromJsonAsync<AppointmentDetail[]>($"AppointmentDetail/{DateTime.Now.ToString("s")}");
         this.details = dtls.ToList();
+        modal.Close();
         StateHasChanged();
+    }
+    public void OnDelayCancel()
+    {
+        modal.Close();
     }
 }
