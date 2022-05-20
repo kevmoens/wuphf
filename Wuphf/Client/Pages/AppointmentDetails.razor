@@ -18,18 +18,22 @@
 
         }
     </div>
-    <Modal @ref="modal">
-        <Title>Delay</Title>
-        <Body>
-            TODO CODE HOW LONG TO DELAY
-        </Body>
-        <Footer>
 
-            <button type="button" class="btn btn-primary" data-dismiss="modal" @onclick="OnDelayOK">OK</button>
-            <button type="button" class="btn" data-dismiss="modal" @onclick="OnDelayCancel">Cancel</button>
 
-        </Footer>
-    </Modal>
+    <div class="overriding">
+        <Modal @ref="modal">
+            <Title>Delay</Title>
+            <Body>
+                TODO CODE HOW LONG TO DELAY
+            </Body>
+            <Footer>
+
+                <button type="button" class="btn btn-primary" data-dismiss="modal" @onclick="OnDelayOK">OK</button>
+                <button type="button" class="btn" data-dismiss="modal" @onclick="OnDelayCancel">Cancel</button>
+
+            </Footer>
+        </Modal>
+    </div>
 
 }
 @code {

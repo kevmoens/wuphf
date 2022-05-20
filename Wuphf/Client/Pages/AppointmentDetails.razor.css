@@ -3,3 +3,11 @@
     grid-template-columns: 200px 190px 180px 180px;
     grid-auto-columns: 80% 20%;
 }
+.overriding ::deep .modal-body {
+    height: calc(50vh - 5rem);
+}
+
+.overriding ::deep .modal-content {
+    top: 50%;
+    transform: translate(0%, 25%);
+}
