@@ -3,6 +3,12 @@
     grid-template-columns: 200px 190px 180px 180px;
     grid-auto-columns: 80% 20%;
 }
+
+/*
+    ::deep only works in CSS Isolation for inner compnents
+    Great example
+*/
+
 .overriding ::deep .modal-body {
     height: calc(50vh - 5rem);
 }
