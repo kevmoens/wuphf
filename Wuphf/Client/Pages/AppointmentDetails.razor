@@ -24,30 +24,27 @@
         <Modal @ref="modal">
             <Title>Delay</Title>
             <Body>
-                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                    <label class="btn btn-outline-secondary"><input type="radio" name="toggle" id="option1"><span>30 mins</span></label>
-                    <label class="btn btn-outline-secondary"><input type="radio" name="toggle" id="option2"><span>1 hour</span></label>
-                    <label class="btn btn-outline-secondary"><input type="radio" name="toggle" id="option3"><span>2 hours</span></label>
-                    <label class="btn btn-outline-secondary"><input type="radio" name="toggle" id="option4"><span>4 hours</span></label>
-                    <label class="btn btn-outline-secondary"><input type="radio" name="toggle" id="option5"><span>1 Day</span></label>
-
-                </div>
+                <MudRadioGroup @bind-SelectedOption="delayOption">
+                    <label class="btn btn-outline-secondary"><MudRadio Option="1" Color="Color.Primary" /><span>30 mins</span></label>
+                    <label class="btn btn-outline-secondary"><MudRadio Option="2" Color="Color.Primary" /><span>1 hour</span></label>
+                    <label class="btn btn-outline-secondary"><MudRadio Option="3" Color="Color.Primary" /><span>2 hours</span></label>
+                    <label class="btn btn-outline-secondary"><MudRadio Option="4" Color="Color.Primary" /><span>4 hours</span></label>
+                    <label class="btn btn-outline-secondary"><MudRadio Option="5" Color="Color.Primary" /><span>1 Day</span></label>
+                </MudRadioGroup>
             </Body>
             <Footer>
-
                 <button type="button" class="btn btn-primary" data-dismiss="modal" @onclick="OnDelayOK">OK</button>
                 <button type="button" class="btn" data-dismiss="modal" @onclick="OnDelayCancel">Cancel</button>
-
             </Footer>
         </Modal>
     </div>
-
-}
+    }
 @code {
-
+    private int delayOption { get; set; }
     private Modal modal { get; set; }
     private AppointmentDetail DelayDetail { get; set; }
     private List<AppointmentDetail> details;
+
     protected async override Task OnInitializedAsync()
     {
         var dtls = await Http.GetFromJsonAsync<AppointmentDetail[]>($"AppointmentDetail/{DateTime.Now.ToString("s")}");
@@ -66,10 +63,10 @@
         DelayDetail = dtl;
         modal.Open();
         StateHasChanged();
-
     }
     public async void OnDelayOK()
     {
+        //delayOption
         await Http.PostAsJsonAsync<AppointmentDetail>("AppointmentDetail/Delay", DelayDetail);
         var dtls = await Http.GetFromJsonAsync<AppointmentDetail[]>($"AppointmentDetail/{DateTime.Now.ToString("s")}");
         this.details = dtls.ToList();

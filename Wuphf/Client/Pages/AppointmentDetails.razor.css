@@ -33,7 +33,7 @@ label.btn {
         display: block;
     }
 
-    label.btn input:checked + span {
+    label.btn input:checked {
         background-color: rgb(80, 110, 228);
         color: #fff;
     }
