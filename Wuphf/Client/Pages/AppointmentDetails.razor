@@ -40,41 +40,59 @@
     </div>
     }
 @code {
-    private int delayOption { get; set; }
-    private Modal modal { get; set; }
-    private AppointmentDetail DelayDetail { get; set; }
-    private List<AppointmentDetail> details;
+        private int delayOption { get; set; }
+        private Modal modal { get; set; }
+        private AppointmentDetail DelayDetail { get; set; }
+        private List<AppointmentDetail> details;
 
-    protected async override Task OnInitializedAsync()
-    {
-        var dtls = await Http.GetFromJsonAsync<AppointmentDetail[]>($"AppointmentDetail/{DateTime.Now.ToString("s")}");
-        this.details = dtls.ToList();
-        StateHasChanged();
+        protected async override Task OnInitializedAsync()
+        {
+            var dtls = await Http.GetFromJsonAsync<AppointmentDetail[]>($"AppointmentDetail/{DateTime.Now.ToString("s")}");
+            this.details = dtls.ToList();
+            StateHasChanged();
+        }
+        public async void OnDetailsCompleted(AppointmentDetail dtl)
+        {
+            dtl.CompletionDateTime = DateTime.Now;
+            details.Remove(dtl);
+            await Http.PostAsJsonAsync<AppointmentDetail>("AppointmentDetail", dtl);
+            StateHasChanged();
+        }
+        public void OnDetailsDelay(AppointmentDetail dtl)
+        {
+            DelayDetail = dtl;
+            modal.Open();
+            StateHasChanged();
+        }
+        public async void OnDelayOK()
+        {
+            switch (delayOption)
+            {
+                case 1:
+                    DelayDetail.SchedDateTime = DelayDetail.SchedDateTime.AddMinutes(30);
+                    break;
+                case 2:
+                    DelayDetail.SchedDateTime = DelayDetail.SchedDateTime.AddHours(1);
+                    break;
+                case 3:
+                    DelayDetail.SchedDateTime = DelayDetail.SchedDateTime.AddHours(2);
+                    break;
+                case 4:
+                    DelayDetail.SchedDateTime = DelayDetail.SchedDateTime.AddHours(4);
+                    break;
+                case 5:
+                    DelayDetail.SchedDateTime = DelayDetail.SchedDateTime.AddDays(1);
+                    break;
+
+            }
+            await Http.PostAsJsonAsync<AppointmentDetail>("AppointmentDetail/Delay", DelayDetail);
+            var dtls = await Http.GetFromJsonAsync<AppointmentDetail[]>($"AppointmentDetail/{DateTime.Now.ToString("s")}");
+            this.details = dtls.ToList();
+            modal.Close();
+            StateHasChanged();
+        }
+        public void OnDelayCancel()
+        {
+            modal.Close();
+        }
     }
-    public async void OnDetailsCompleted(AppointmentDetail dtl)
-    {
-        dtl.CompletionDateTime = DateTime.Now;
-        details.Remove(dtl);
-        await Http.PostAsJsonAsync<AppointmentDetail>("AppointmentDetail", dtl);
-        StateHasChanged();
-    }
-    public void OnDetailsDelay(AppointmentDetail dtl)
-    {
-        DelayDetail = dtl;
-        modal.Open();
-        StateHasChanged();
-    }
-    public async void OnDelayOK()
-    {
-        //delayOption
-        await Http.PostAsJsonAsync<AppointmentDetail>("AppointmentDetail/Delay", DelayDetail);
-        var dtls = await Http.GetFromJsonAsync<AppointmentDetail[]>($"AppointmentDetail/{DateTime.Now.ToString("s")}");
-        this.details = dtls.ToList();
-        modal.Close();
-        StateHasChanged();
-    }
-    public void OnDelayCancel()
-    {
-        modal.Close();
-    }
-}

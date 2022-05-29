@@ -75,23 +75,29 @@ namespace Wuphf.Server.Controllers
                 return;
             }
             //Update
-            result.SchedDateTime = UpdateDateTime(appt, result.SchedDateTime); 
+            if (result.SchedDateTime == value.SchedDateTime)
+            {
+                result.SchedDateTime = UpdateDateTime(appt, result.SchedDateTime);
+                if (appt.Reoccurance != Shared.ReoccuranceTypes.None)
+                {
+                    foreach (var detail in repository
+                        .AppointmentDetails
+                        .Where(item =>
+                            item.AppointmentId == value.AppointmentId
+                            && item.CompletionDateTime == null
+                            && item.SchedDateTime > result.SchedDateTime)
+                        )
+                    {
+                        detail.SchedDateTime = UpdateDateTime(appt, detail.SchedDateTime);
+                        repository.AppointmentDetails.Update(detail);
+                    }
+                }
+            } else
+            {
+                result.SchedDateTime = value.SchedDateTime;
+            }
             repository.AppointmentDetails.Update(result);
 
-            if (appt.Reoccurance != Shared.ReoccuranceTypes.None)
-            {
-                foreach (var detail in repository
-                    .AppointmentDetails
-                    .Where(item =>
-                        item.AppointmentId == value.AppointmentId
-                        && item.CompletionDateTime == null
-                        && item.SchedDateTime > result.SchedDateTime)
-                    )
-                {
-                    detail.SchedDateTime = UpdateDateTime(appt, detail.SchedDateTime);
-                    repository.AppointmentDetails.Update(detail);
-                }
-            }
 
             repository.SaveChanges();
         }
